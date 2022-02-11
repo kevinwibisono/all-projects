@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="viewmodel"
+            type="my.istts.finalproject.viewmodels.AddComplainViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context="my.istts.finalproject.AddComplainActivity">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/tbAddComplain"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:navigationIcon="@drawable/ic_baseline_arrow_back_white_24"
+                app:title="Tambah Komplain"
+                app:titleTextColor="@color/design_default_color_on_primary" />
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <ScrollView
+            android:id="@+id/svAddComplain"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Produk Bermasalah" />
+
+                <TextView
+                    android:id="@+id/tvErrorKomplainProduk"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility='@{viewmodel.errors[3] == "" ? View.GONE : View.VISIBLE, default=gone}'
+                    android:textColor="@android:color/holo_red_light" />
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvProductComplain"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:orientation="horizontal"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        android:visibility="@{viewmodel.pjItemsLoading ? View.GONE : View.VISIBLE, default=gone}"/>
+
+                    <ProgressBar
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:visibility="@{viewmodel.pjItemsLoading ? View.VISIBLE : View.GONE, default=visible}"/>
+                </FrameLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Detail Keluhan" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tlKomplainKeluhan"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minLines="5"
+                        android:text="@={viewmodel.keluhan}" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Foto Bukti" />
+
+                <TextView
+                    android:id="@+id/tvErrorKomplainBukti"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility='@{viewmodel.errors[2] == "" ? View.GONE : View.VISIBLE, default=gone}'
+                    android:textColor="@android:color/holo_red_light"/>
+
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <FrameLayout
+                            android:layout_width="150dp"
+                            android:layout_height="150dp"
+                            android:layout_marginEnd="10dp">
+
+                            <ImageView
+                                android:id="@+id/proof1"
+                                android:layout_width="150dp"
+                                android:layout_height="150dp"
+                                android:src="@drawable/uploadimg" />
+
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/btnDeleteBukti1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:minWidth="0dp"
+                                android:minHeight="0dp"
+                                app:backgroundTint="@android:color/darker_gray"
+                                android:textSize="12sp"
+                                android:layout_gravity="bottom|center_horizontal"
+                                android:layout_marginBottom="5dp"
+                                android:visibility="@{viewmodel.bukti[0] != null ? View.VISIBLE : View.GONE, default=gone}"
+                                android:text="Hapus"/>
+                        </FrameLayout>
+
+                        <FrameLayout
+                            android:layout_width="150dp"
+                            android:layout_height="150dp"
+                            android:layout_marginEnd="10dp">
+
+                            <ImageView
+                                android:id="@+id/proof2"
+                                android:layout_width="150dp"
+                                android:layout_height="150dp"
+                                android:src="@drawable/uploadimg" />
+
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/btnDeleteBukti2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:minWidth="0dp"
+                                android:minHeight="0dp"
+                                app:backgroundTint="@android:color/darker_gray"
+                                android:textSize="12sp"
+                                android:layout_gravity="bottom|center_horizontal"
+                                android:layout_marginBottom="5dp"
+                                android:visibility="@{viewmodel.bukti[1] != null ? View.VISIBLE : View.GONE, default=gone}"
+                                android:text="Hapus"/>
+                        </FrameLayout>
+
+                        <FrameLayout
+                            android:layout_width="150dp"
+                            android:layout_height="150dp"
+                            android:layout_marginEnd="10dp">
+
+                            <ImageView
+                                android:id="@+id/proof3"
+                                android:layout_width="150dp"
+                                android:layout_height="150dp"
+                                android:src="@drawable/uploadimg" />
+
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/btnDeleteBukti3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:minWidth="0dp"
+                                android:minHeight="0dp"
+                                app:backgroundTint="@android:color/darker_gray"
+                                android:textSize="12sp"
+                                android:layout_gravity="bottom|center_horizontal"
+                                android:layout_marginBottom="5dp"
+                                android:visibility="@{viewmodel.bukti[2] != null ? View.VISIBLE : View.GONE, default=gone}"
+                                android:text="Hapus"/>
+                        </FrameLayout>
+
+                        <FrameLayout
+                            android:layout_width="150dp"
+                            android:layout_height="150dp"
+                            android:layout_marginEnd="10dp">
+
+                            <ImageView
+                                android:id="@+id/proof4"
+                                android:layout_width="150dp"
+                                android:layout_height="150dp"
+                                android:src="@drawable/uploadimg" />
+
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/btnDeleteBukti4"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:minWidth="0dp"
+                                android:minHeight="0dp"
+                                app:backgroundTint="@android:color/darker_gray"
+                                android:textSize="12sp"
+                                android:layout_gravity="bottom|center_horizontal"
+                                android:layout_marginBottom="5dp"
+                                android:visibility="@{viewmodel.bukti[3] != null ? View.VISIBLE : View.GONE, default=gone}"
+                                android:text="Hapus"/>
+                        </FrameLayout>
+                    </LinearLayout>
+                </HorizontalScrollView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="URL Bukti Video (Jika Ada)" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:text="@={viewmodel.video}"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Jumlah Pengembalian" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tlKomplainJumlah"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    app:suffixText=" %">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:singleLine="true"
+                        android:maxLength="3"
+                        android:text="100"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnComplainAdd"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:text="Tambahkan Komplain" />
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+</layout>
+

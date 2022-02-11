@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="viewmodel"
+            type="my.istts.finalproject.viewmodels.itemviewmodels.GiveReviewItemViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/ivReviewItem"
+                android:layout_width="50dp"
+                android:layout_height="50dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="@{viewmodel.itemName}"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:onClick="@{() -> viewmodel.setReviewNum(1)}"
+                android:src='@{viewmodel.reviewNum > 0 ? @drawable/ic_baseline_star_36 : @drawable/ic_baseline_star_border_36}' />
+
+            <ImageView
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:onClick="@{() -> viewmodel.setReviewNum(2)}"
+                android:src='@{viewmodel.reviewNum > 1 ? @drawable/ic_baseline_star_36 : @drawable/ic_baseline_star_border_36}' />
+
+            <ImageView
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:onClick="@{() -> viewmodel.setReviewNum(3)}"
+                android:src='@{viewmodel.reviewNum > 2 ? @drawable/ic_baseline_star_36 : @drawable/ic_baseline_star_border_36}' />
+
+            <ImageView
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:onClick="@{() -> viewmodel.setReviewNum(4)}"
+                android:src='@{viewmodel.reviewNum > 3 ? @drawable/ic_baseline_star_36 : @drawable/ic_baseline_star_border_36}' />
+
+            <ImageView
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:onClick="@{() -> viewmodel.setReviewNum(5)}"
+                android:src='@{viewmodel.reviewNum > 4 ? @drawable/ic_baseline_star_36 : @drawable/ic_baseline_star_border_36}' />
+        </LinearLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minLines="5"
+                android:text="@={viewmodel.reviewIsi}" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </LinearLayout>
+</layout>
+

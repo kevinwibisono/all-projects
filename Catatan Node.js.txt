@@ -1,0 +1,24 @@
+Buka folder ini di cmd
+Install node.js
+Syntax:
+"npm init" - akan membuat package.json
+"npm install express"
+
+Buat index.js didalam Minggu1
+Lalu cmd (Minggu1) ketik "node index.js"
+Lalu buka localhost:3000
+
+Setiap menambahkan code baru, hentikan proses di cmd dulu (ctrl+c) lalu ketik lagi "node index.js"
+
+"npm install nodemon -g"
+"nodemon index.js"
+
+Untuk menggunakan mysql (Minggu 3-matkul)
+
+"npm install mysql"
+
+Untuk memberikan permission ke client:
+"npm install cors"
+
+Untuk menggunakan view(html page) pada express:
+"npm install ejs"

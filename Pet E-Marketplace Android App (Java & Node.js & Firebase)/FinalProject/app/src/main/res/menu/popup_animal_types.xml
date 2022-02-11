@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/optAnjingBesar"
+        android:title="Anjing Besar (>20kg) + Rp 20.000" />
+    <item
+        android:id="@+id/optAnjingSedang"
+        android:title="Anjing Sedang (10-20 kg) + Rp 10.000" />
+    <item
+        android:id="@+id/optAnjingKecil"
+        android:title="Anjing Kecil (1-10 kg) + Rp 5.000" />
+    <item
+        android:id="@+id/optKucing"
+        android:title="Kucing" />
+    <item
+        android:id="@+id/optKelinci"
+        android:title="Kelinci" />
+    <item
+        android:id="@+id/optLainnya"
+        android:title="Lainnya" />
+</menu>

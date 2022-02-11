@@ -1,0 +1,382 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="viewmodel"
+            type="com.example.sellerapp.viewmodels.HotelHomeViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".HotelHomeFragment">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/tbAwal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:title="@{viewmodel.hotelName}"
+                app:titleTextColor="@color/design_default_color_on_primary" />
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipeRefreshHotelHome"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#FAFAFA"
+                    android:descendantFocusability="blocksDescendants"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:text="Hal-hal yang perlu diperhatikan" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/cardHotelNew"
+                            android:layout_width="150dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="20dp"
+                            android:layout_marginBottom="10dp"
+                            app:cardElevation="5dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical"
+                                android:padding="10dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="20dp"
+                                    android:minLines="2"
+                                    android:text="Booking Baru"
+                                    android:textSize="16sp"
+                                    android:textStyle="bold" />
+
+                                <FrameLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="bottom|right">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="@{String.valueOf(viewmodel.importantThings[0])}"
+                                        android:textSize="18sp"
+                                        android:visibility="@{viewmodel.isDoneCounting()[0] ? View.VISIBLE : View.GONE, default=gone}" />
+
+                                    <ProgressBar
+                                        android:layout_width="25dp"
+                                        android:layout_height="25dp"
+                                        android:visibility="@{viewmodel.isDoneCounting()[0] ? View.GONE : View.VISIBLE, default=visible}" />
+                                </FrameLayout>
+                            </LinearLayout>
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/cardHotelScheduled"
+                            android:layout_width="150dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_marginBottom="10dp"
+                            app:cardElevation="5dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical"
+                                android:padding="10dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="20dp"
+                                    android:text="Booking Terjadwal"
+                                    android:textSize="16sp"
+                                    android:textStyle="bold" />
+
+                                <FrameLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="end">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="@{String.valueOf(viewmodel.importantThings[1])}"
+                                        android:textSize="18sp"
+                                        android:visibility="@{viewmodel.isDoneCounting()[1] ? View.VISIBLE : View.GONE, default=gone}" />
+
+                                    <ProgressBar
+                                        android:layout_width="25dp"
+                                        android:layout_height="25dp"
+                                        android:visibility="@{viewmodel.isDoneCounting()[1] ? View.GONE : View.VISIBLE, default=visible}" />
+                                </FrameLayout>
+                            </LinearLayout>
+                        </com.google.android.material.card.MaterialCardView>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/cardHotelActive"
+                            android:layout_width="150dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_marginBottom="10dp"
+                            app:cardElevation="5dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical"
+                                android:padding="10dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="20dp"
+                                    android:text="Dalam Penginapan"
+                                    android:textSize="16sp"
+                                    android:textStyle="bold" />
+
+                                <FrameLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="end">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="@{String.valueOf(viewmodel.importantThings[2])}"
+                                        android:textSize="18sp"
+                                        android:visibility="@{viewmodel.isDoneCounting()[2] ? View.VISIBLE : View.GONE, default=gone}" />
+
+                                    <ProgressBar
+                                        android:layout_width="25dp"
+                                        android:layout_height="25dp"
+                                        android:visibility="@{viewmodel.isDoneCounting()[2] ? View.GONE : View.VISIBLE, default=visible}" />
+                                </FrameLayout>
+                            </LinearLayout>
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/cardHotelChat"
+                            android:layout_width="150dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="20dp"
+                            android:layout_marginBottom="10dp"
+                            app:cardElevation="5dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical"
+                                android:padding="10dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="20dp"
+                                    android:text="Chat Belum Dibaca"
+                                    android:textSize="16sp"
+                                    android:textStyle="bold" />
+
+                                <FrameLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="end">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="end"
+                                        android:text="@{String.valueOf(viewmodel.importantThings[3])}"
+                                        android:visibility="@{viewmodel.isDoneCounting()[3] ? View.VISIBLE : View.GONE, default=gone}" />
+
+                                    <ProgressBar
+                                        android:layout_width="25dp"
+                                        android:layout_height="25dp"
+                                        android:visibility="@{viewmodel.isDoneCounting()[3] ? View.GONE : View.VISIBLE, default=visible}" />
+                                </FrameLayout>
+                            </LinearLayout>
+                        </com.google.android.material.card.MaterialCardView>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/cardHotelDiscuss"
+                            android:layout_width="150dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_marginBottom="10dp"
+                            app:cardElevation="5dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical"
+                                android:padding="10dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="20dp"
+                                    android:text="Diskusi Belum Dibalas"
+                                    android:textSize="16sp"
+                                    android:textStyle="bold" />
+
+                                <FrameLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="end">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="@{String.valueOf(viewmodel.importantThings[4])}"
+                                        android:textSize="18sp"
+                                        android:visibility="@{viewmodel.isDoneCounting()[4] ? View.VISIBLE : View.GONE, default=gone}" />
+
+                                    <ProgressBar
+                                        android:layout_width="25dp"
+                                        android:layout_height="25dp"
+                                        android:visibility="@{viewmodel.isDoneCounting()[4] ? View.GONE : View.VISIBLE, default=visible}" />
+                                </FrameLayout>
+                            </LinearLayout>
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/cardHotelReview"
+                            android:layout_width="150dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="20dp"
+                            android:layout_marginBottom="10dp"
+                            app:cardElevation="5dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical"
+                                android:padding="10dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="20dp"
+                                    android:text="Ulasan Belum Dibalas"
+                                    android:textSize="16sp"
+                                    android:textStyle="bold" />
+
+                                <FrameLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="end">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="end"
+                                        android:text="@{String.valueOf(viewmodel.importantThings[5])}"
+                                        android:visibility="@{viewmodel.isDoneCounting()[5] ? View.VISIBLE : View.GONE, default=gone}" />
+
+                                    <ProgressBar
+                                        android:layout_width="25dp"
+                                        android:layout_height="25dp"
+                                        android:visibility="@{viewmodel.isDoneCounting()[5] ? View.GONE : View.VISIBLE, default=visible}" />
+                                </FrameLayout>
+                            </LinearLayout>
+                        </com.google.android.material.card.MaterialCardView>
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="10dp"
+                        android:text="Kamar-kamar yang perlu diperhatikan" />
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:visibility="@{viewmodel.isHotelLoading() ? View.GONE : View.VISIBLE, default=gone}">
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/rvImportantRooms"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:visibility="@{viewmodel.hotelVMs.size() &lt; 1 ? View.GONE : View.VISIBLE, default=gone}"/>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:padding="10dp"
+                                android:gravity="center"
+                                android:text="Tidak Ada Kamar Yang Bermasalah"
+                                android:visibility="@{viewmodel.hotelVMs.size() &lt; 1 ? View.VISIBLE : View.GONE, default=gone}"/>
+                        </LinearLayout>
+
+                        <ProgressBar
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:visibility="@{viewmodel.isHotelLoading() ? View.VISIBLE : View.GONE, default=visible}"/>
+                    </FrameLayout>
+
+                </LinearLayout>
+            </ScrollView>
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    </LinearLayout>
+</layout>

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <import type="my.istts.finalproject.ThousandSeparator"/>
+        <import type="android.view.View"/>
+        <variable
+            name="viewmodel"
+            type="my.istts.finalproject.viewmodels.itemviewmodels.PaketGroomingItemViewModel" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardElevation="5dp"
+        android:layout_margin="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{viewmodel.packageName}"
+                    android:maxLines="1"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
+                    android:layout_marginBottom="10dp"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    android:text='@{"Rp "+ThousandSeparator.getTS(viewmodel.packagePrice)}'
+                    android:textStyle="bold"/>
+            </LinearLayout>
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right">
+
+                <com.google.android.material.button.MaterialButton
+                    style="?attr/borderlessButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@android:color/holo_orange_dark"
+                    android:drawableLeft="@drawable/ic_baseline_add_20"
+                    android:drawableRight="@drawable/cart_white"
+                    android:minWidth="0dp"
+                    android:minHeight="0dp"
+                    android:enabled="@{viewmodel.isPaketAddEnabled() ? true : false, default=false}"
+                    android:visibility="@{viewmodel.paketInCart &lt; 1 ? View.VISIBLE : View.GONE, default=visible}"
+                    android:onClick="@{() -> viewmodel.addCart()}"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:orientation="horizontal"
+                    android:visibility="@{viewmodel.paketInCart &lt; 1 ? View.GONE : View.VISIBLE, default=gone}">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnDeleteCartProduct"
+                        style="?attr/borderlessButtonStyle"
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="#FFFFFF"
+                        android:drawableLeft="@drawable/ic_baseline_delete_20"
+                        android:enabled="@{viewmodel.isPaketAddEnabled() ? true : false, default=false}"
+                        android:minWidth="0dp"
+                        android:minHeight="0dp"
+                        android:text=""
+                        android:onClick="@{() -> viewmodel.redCart(true)}"/>
+
+                    <com.google.android.material.button.MaterialButton
+                        style="?attr/borderlessButtonStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@android:color/holo_red_light"
+                        android:drawableLeft="@drawable/ic_baseline_remove_20"
+                        android:enabled="@{viewmodel.isPaketAddEnabled() ? true : false, default=false}"
+                        android:minWidth="0dp"
+                        android:minHeight="0dp"
+                        android:text=""
+                        android:onClick="@{() -> viewmodel.redCart(false)}"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:text="@{String.valueOf(viewmodel.paketInCart)}" />
+
+                    <com.google.android.material.button.MaterialButton
+                        style="?attr/borderlessButtonStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@android:color/holo_green_light"
+                        android:drawableLeft="@drawable/ic_baseline_add_20"
+                        android:enabled="@{viewmodel.isPaketAddEnabled() ? true : false, default=false}"
+                        android:minWidth="0dp"
+                        android:minHeight="0dp"
+                        android:text=""
+                        android:onClick="@{() -> viewmodel.addCart()}"/>
+                </LinearLayout>
+            </FrameLayout>
+
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+</layout>
+

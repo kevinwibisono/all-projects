@@ -1,0 +1,835 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    
+    <data>
+        <import type="my.istts.finalproject.ThousandSeparator"/>
+        <import type="android.view.View"/>
+        <variable
+            name="viewmodel"
+            type="my.istts.finalproject.viewmodels.SellerProfileViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context="my.istts.finalproject.SellerProfileActivity">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/topAppBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="visible">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/tbClinicProfile"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:menu="@menu/menu_appointment"
+                app:navigationIcon="@drawable/ic_baseline_arrow_back_white_24"
+                app:title='Detail Klinik'
+                app:titleTextColor="#ffffff"
+                android:theme="@style/ToolbarTheme"
+                android:visibility="@{viewmodel.role == 3 ? View.VISIBLE : View.GONE, default=gone}"/>
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/tbShopProfile"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:menu="@menu/header_product_menu"
+                app:navigationIcon="@drawable/ic_baseline_arrow_back_white_24"
+                android:visibility="@{viewmodel.role == 3 ? View.GONE : View.VISIBLE, default=visible}"
+                app:title='@{viewmodel.role == 1 ? "Detail Groomer" : "", default=""}'
+                app:titleTextColor="#ffffff"
+                android:theme="@style/ToolbarTheme">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="49dp"
+                    android:layout_marginBottom="10dp"
+                    android:hint='@{"Cari di "+viewmodel.sellerName}'
+                    android:visibility="@{viewmodel.role % 2 == 0 ? View.VISIBLE : View.GONE, default=gone}">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edSearchShopProfile"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="#FFFFFF"
+                        android:clickable="true"
+                        android:drawableEnd="@drawable/ic_baseline_search_24"
+                        android:focusable="false"
+                        android:inputType="none" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </com.google.android.material.appbar.MaterialToolbar>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:descendantFocusability="blocksDescendants">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingStart="20dp"
+                    android:paddingTop="20dp"
+                    android:paddingEnd="20dp">
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/ivSellerProfile"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center_vertical"
+                        android:background="#FFFFFF"
+                        android:scaleType="fitXY"
+                        app:shapeAppearanceOverlay="@style/circleImageView" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:orientation="vertical"
+                        android:paddingStart="10dp"
+                        android:paddingTop="10dp"
+                        android:paddingEnd="10dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@{viewmodel.sellerName}"
+                            android:textColor="#000000"
+                            android:textSize="20sp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal"
+                            android:visibility="@{viewmodel.sellerScore > 0 ? View.VISIBLE : View.GONE, default=gone}">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:src="@drawable/ic_baseline_star_20" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginStart="5dp"
+                                android:text="@{String.valueOf(viewmodel.sellerScore).substring(0, 3)}" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal"
+                            android:visibility="@{viewmodel.sellerFollower > 0 ? View.VISIBLE : View.GONE, default=gone}">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:src="@drawable/ic_baseline_supervisor_account_20" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginStart="5dp"
+                                android:text='@{viewmodel.sellerFollower+" Orang Memfavortikan"}' />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnChatProfile"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Chat"
+                        android:minWidth="0dp"
+                        android:layout_marginEnd="10dp"/>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+                        android:layout_marginEnd="20dp"
+                        android:text="Favoritkan"
+                        android:textSize="12sp"
+                        android:onClick="btnFollowClick"
+                        app:backgroundTint="@android:color/holo_green_light"
+                        android:enabled="@{viewmodel.followEnabled ? true : false, default=false}"
+                        android:visibility='@{viewmodel.followId == "" ? View.VISIBLE : View.GONE, default=gone}'/>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+                        android:layout_marginEnd="20dp"
+                        android:text="Difavoritkan"
+                        android:onClick="btnFollowClick"
+                        android:textSize="12sp"
+                        app:backgroundTint="#ffffff"
+                        app:icon="@drawable/ic_baseline_check_24"
+                        app:iconTint="@android:color/holo_green_light"
+                        android:textColor="@android:color/holo_green_light"
+                        app:strokeWidth="2dp"
+                        app:strokeColor="@android:color/holo_green_light"
+                        android:enabled="@{viewmodel.followEnabled ? true : false, default=false}"
+                        android:visibility='@{viewmodel.followId == "" ? View.GONE : View.VISIBLE, default=gone}'/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_margin="5dp"
+                    android:background="@android:color/darker_gray"
+                    android:orientation="horizontal" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:orientation="vertical">
+
+                    <com.denzcoskun.imageslider.ImageSlider
+                        android:id="@+id/slideSellerPoster"
+                        android:layout_width="match_parent"
+                        android:layout_height="250dp"
+                        android:layout_marginBottom="10dp"
+                        app:iss_auto_cycle="true"
+                        app:iss_delay="1000"
+                        app:iss_period="1000"
+                        app:iss_title_background="@android:color/transparent" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{viewmodel.sellerDesc}"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:id="@+id/partSellerProducts"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:padding="10dp"
+                        android:visibility="@{viewmodel.role == 0 ? View.VISIBLE : View.GONE, default=gone}">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:visibility="@{viewmodel.shopPromos.size() > 0 ? View.VISIBLE : View.GONE, default=gone}">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="5dp"
+                                android:text="Promo-Promo Pet Shop"
+                                android:textColor="#000000"
+                                android:textSize="18sp" />
+
+                            <FrameLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    android:visibility="@{viewmodel.shopPromosLoading ? View.GONE : View.VISIBLE, default=gone}">
+
+                                    <androidx.recyclerview.widget.RecyclerView
+                                        android:id="@+id/rvVoucherToko"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginBottom="20dp"
+                                        android:visibility="@{viewmodel.shopPromos.size() > 0 ? View.VISIBLE : View.GONE, default=gone}"/>
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_horizontal"
+                                        android:layout_margin="20dp"
+                                        android:textStyle="bold"
+                                        android:text="Toko Belum Mengadakan Promo"
+                                        android:visibility="@{viewmodel.shopPromos.size() > 0 ? View.GONE : View.VISIBLE, default=gone}"/>
+                                </LinearLayout>
+
+                                <ProgressBar
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_horizontal"
+                                    android:layout_marginTop="10dp"
+                                    android:visibility="@{viewmodel.shopPromosLoading ? View.VISIBLE : View.GONE, default=visible}"/>
+                            </FrameLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:visibility="@{viewmodel.topProducts.size() > 0 ? View.VISIBLE : View.GONE, default=gone}">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="5dp"
+                                android:text="Produk Terlaris"
+                                android:textColor="#000000"
+                                android:textSize="18sp" />
+
+                            <FrameLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <androidx.recyclerview.widget.RecyclerView
+                                    android:id="@+id/rvShopTop"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="20dp"
+                                    android:visibility="@{viewmodel.topProductsLoading ? View.GONE : View.VISIBLE, default=gone}"/>
+
+                                <ProgressBar
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_horizontal"
+                                    android:layout_marginTop="10dp"
+                                    android:visibility="@{viewmodel.topProductsLoading ? View.VISIBLE : View.GONE, default=visible}"/>
+                            </FrameLayout>
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="5dp"
+                            android:text="Semua Produk"
+                            android:textColor="#000000"
+                            android:textSize="18sp" />
+
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:visibility="@{viewmodel.allProductsLoading ? View.GONE : View.VISIBLE, default=gone}">
+
+                                <androidx.recyclerview.widget.RecyclerView
+                                    android:id="@+id/rvShopAll"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:visibility="@{viewmodel.allProducts.size() > 0 ? View.VISIBLE : View.GONE, default=gone}"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="10dp"
+                                    android:layout_gravity="center_horizontal"
+                                    android:textSize="16sp"
+                                    android:text="Tidak Dapat Ditemukan Produk"
+                                    android:visibility="@{viewmodel.allProducts.size() > 0 ? View.GONE : View.VISIBLE, default=visible}"/>
+                            </LinearLayout>
+
+                            <ProgressBar
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_marginTop="10dp"
+                                android:visibility="@{viewmodel.allProductsLoading ? View.VISIBLE : View.GONE, default=visible}"/>
+                        </FrameLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/partSellerHotels"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:padding="10dp"
+                        android:visibility="@{viewmodel.role == 2 ? View.VISIBLE : View.GONE, default=gone}">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:visibility="@{viewmodel.topHotel.size() > 0 ? View.VISIBLE : View.GONE, default=gone}">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="5dp"
+                                android:text="Kamar Paling Diminati"
+                                android:textColor="#000000"
+                                android:textSize="18sp" />
+
+                            <FrameLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <androidx.recyclerview.widget.RecyclerView
+                                    android:id="@+id/rvSellerRoomTop"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="20dp"
+                                    android:orientation="horizontal"
+                                    android:scrollbars="horizontal"
+                                    android:fadeScrollbars="false"
+                                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                                    android:visibility="@{viewmodel.topHotelLoading ? View.GONE : View.VISIBLE, default=gone}"/>
+
+                                <ProgressBar
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_horizontal"
+                                    android:layout_marginTop="10dp"
+                                    android:visibility="@{viewmodel.topHotelLoading ? View.VISIBLE : View.GONE, default=visible}"/>
+                            </FrameLayout>
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="5dp"
+                            android:text="Semua Kamar"
+                            android:textColor="#000000"
+                            android:textSize="18sp" />
+
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:visibility="@{viewmodel.allHotelLoading ? View.GONE : View.VISIBLE, default=gone}">
+
+                                <androidx.recyclerview.widget.RecyclerView
+                                    android:id="@+id/rvSellerRoomAll"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="20dp"
+                                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                                    android:visibility="@{viewmodel.allHotel.size() > 0 ? View.VISIBLE : View.GONE, default=gone}"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="10dp"
+                                    android:layout_gravity="center_horizontal"
+                                    android:textSize="16sp"
+                                    android:text="Tidak Dapat Ditemukan Kamar Pet Hotel"
+                                    android:visibility="@{viewmodel.allHotel.size() > 0 ? View.GONE : View.VISIBLE, default=visible}"/>
+                            </LinearLayout>
+
+                            <ProgressBar
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_marginTop="10dp"
+                                android:visibility="@{viewmodel.allHotelLoading ? View.VISIBLE : View.GONE, default=visible}"/>
+                        </FrameLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/partSellerClinic"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:padding="10dp"
+                        android:visibility="@{viewmodel.role == 3 ? View.VISIBLE : View.GONE, default=gone}">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="10dp"
+                                    android:text="Alamat"
+                                    android:textColor="#000000" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="20dp"
+                                    android:text="@{viewmodel.clinicAddress}" />
+                            </LinearLayout>
+
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/btnClinicAddrNavigation"
+                                style="?attr/borderlessButtonStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:backgroundTint="#FFFFFF"
+                                android:drawableLeft="@drawable/ic_baseline_directions_36"
+                                android:minWidth="0dp"
+                                android:minHeight="0dp"
+                                android:enabled='@{viewmodel.clinicCoors == "" ? false : true, default=false}'
+                                app:iconPadding="0dp" />
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="10dp"
+                            android:text="Jam Buka/Tutup"
+                            android:textColor="#000000" />
+
+                        <LinearLayout
+                            android:id="@+id/klinikBukaSenin"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="5dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="3"
+                                android:text="Senin: " />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text='@{viewmodel.clinicOpens[0] != "" ? viewmodel.clinicOpens[0]+" - "+viewmodel.clinicCloses[0] : "TUTUP", default=""}' />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/klinikBukaSelasa"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginBottom="5dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="3"
+                                android:text="Selasa: " />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text='@{viewmodel.clinicOpens[1] != "" ? viewmodel.clinicOpens[1]+" - "+viewmodel.clinicCloses[1] : "TUTUP", default=""}' />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/klinikBukaRabu"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginBottom="5dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="3"
+                                android:text="Rabu: " />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text='@{viewmodel.clinicOpens[2] != "" ? viewmodel.clinicOpens[2]+" - "+viewmodel.clinicCloses[2] : "TUTUP", default=""}' />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/klinikBukaKamis"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginBottom="5dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="3"
+                                android:text="Kamis: " />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text='@{viewmodel.clinicOpens[3] != "" ? viewmodel.clinicOpens[3]+" - "+viewmodel.clinicCloses[3] : "TUTUP", default=""}' />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/klinikBukaJumat"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginBottom="5dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="3"
+                                android:text="Jumat: " />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text='@{viewmodel.clinicOpens[4] != "" ? viewmodel.clinicOpens[4]+" - "+viewmodel.clinicCloses[4] : "TUTUP", default=""}' />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/klinikBukaSabtu"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginBottom="5dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="3"
+                                android:text="Sabtu: " />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text='@{viewmodel.clinicOpens[5] != "" ? viewmodel.clinicOpens[5]+" - "+viewmodel.clinicCloses[5] : "TUTUP", default=""}' />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/klinikBukaMinggu"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginBottom="5dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="20dp"
+                                android:layout_weight="3"
+                                android:text="Minggu: " />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="20dp"
+                                android:layout_weight="1"
+                                android:text='@{viewmodel.clinicOpens[6] != "" ? viewmodel.clinicOpens[6]+" - "+viewmodel.clinicCloses[6] : "TUTUP", default=""}' />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="10dp"
+                        android:visibility="@{viewmodel.role == 1 ? View.VISIBLE : View.GONE, default=gone}">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Paket-Paket Grooming"
+                            android:textColor="#000000"
+                            android:textSize="18sp" />
+
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:visibility="@{viewmodel.isGroomLoading() ? View.GONE : View.VISIBLE, default=gone}">
+
+                                <androidx.recyclerview.widget.RecyclerView
+                                    android:id="@+id/rvGroomerPackages"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="20dp"
+                                    android:orientation="horizontal"
+                                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                                    android:visibility="@{viewmodel.groomingPacks.size() > 0 ? View.VISIBLE : View.GONE, default=gone}"/>
+
+                            </LinearLayout>
+
+                            <ProgressBar
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_marginTop="10dp"
+                                android:visibility="@{viewmodel.isGroomLoading() ? View.VISIBLE : View.GONE, default=visible}"/>
+                        </FrameLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="10dp"
+                        android:visibility="@{viewmodel.role == 1 ? View.VISIBLE : viewmodel.role == 3 ? View.VISIBLE : View.GONE, default=gone}">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Ulasan Pelanggan"
+                            android:textColor="#000000"
+                            android:textSize="18sp" />
+
+                        <com.google.android.material.tabs.TabLayout
+                            android:id="@+id/tabsSellerReviews"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:tabMode="scrollable">
+
+                            <com.google.android.material.tabs.TabItem
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Semua" />
+
+                            <com.google.android.material.tabs.TabItem
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Skor 5" />
+
+                            <com.google.android.material.tabs.TabItem
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Skor 4" />
+
+                            <com.google.android.material.tabs.TabItem
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Skor 3" />
+
+                            <com.google.android.material.tabs.TabItem
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Skor 2" />
+
+                            <com.google.android.material.tabs.TabItem
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Skor 1" />
+                        </com.google.android.material.tabs.TabLayout>
+
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:visibility="@{viewmodel.isRevLoading() ? View.GONE : View.VISIBLE, default=gone}">
+
+                                <androidx.recyclerview.widget.RecyclerView
+                                    android:id="@+id/rvSellerReviews"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:visibility="@{viewmodel.reviews.size() > 0 ? View.VISIBLE : View.GONE, default=visible}"
+                                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_horizontal"
+                                    android:layout_marginTop="30dp"
+                                    android:text="Belum Ada Ulasan Untuk Saat Ini"
+                                    android:visibility="@{viewmodel.reviews.size() > 0 ? View.GONE : View.VISIBLE, default=gone}" />
+                            </LinearLayout>
+
+                            <ProgressBar
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_marginTop="10dp"
+                                android:visibility="@{viewmodel.isRevLoading() ? View.VISIBLE : View.GONE, default=visible}" />
+                        </FrameLayout>
+
+                        <TextView
+                            android:id="@+id/sellerProfileSeeReviews"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_margin="20dp"
+                            android:text="Lihat Semua Ulasan"
+                            android:textColor="#2196F3" />
+                    </LinearLayout>
+
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="@{viewmodel.role == 3 ? View.VISIBLE : View.GONE, default=gone}">
+
+            <com.google.android.material.bottomappbar.BottomAppBar
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+<!--                <com.google.android.material.button.MaterialButton-->
+<!--                    android:id="@+id/btnClinicAppo"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_margin="10dp"-->
+<!--                    android:text='@{viewmodel.isClinicOpenNow() ? "Buat Janji Temu" : "Klinik Sedang Tutup", default=""}'-->
+<!--                    android:enabled="@{viewmodel.isClinicOpenNow() ? true : false, default=false}"-->
+<!--                    android:textSize="12sp"-->
+<!--                    app:backgroundTint="#FF9800" />-->
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnClinicAppo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:text='Buat Janji Temu'
+                    android:textSize="12sp"
+                    app:backgroundTint="#FF9800" />
+            </com.google.android.material.bottomappbar.BottomAppBar>
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+    </LinearLayout>
+</layout>

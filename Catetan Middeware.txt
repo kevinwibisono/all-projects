@@ -1,0 +1,84 @@
+1. Controller (TestCtr.php)
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+
+class TestCtr extends Controller
+{
+    public function __construct(){
+        $this->middleware("age")->only(['agecheck']);
+    }
+
+    public function index(){
+        return view('age');
+    }
+
+    public function agecheck(){
+        echo "You are eligible to vote";
+    }
+}
+
+2. View (age.blade.php)
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <form action="{{url('/agecheck')}}" method="get">
+        <input type="text" name="age" placeholder="Enter your age:">
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
+
+3. Routes yang digunakan
+Route::get('/test', 'TestCtr@index');
+Route::get('/agecheck', 'TestCtr@agecheck');
+
+4. Middleware untuk pengecekan umur (AgeMiddleware.php)
+<?php
+
+namespace App\Http\Middleware;
+
+use Closure;
+
+class AgeMiddleware
+{
+    /**
+     * Handle an incoming request.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Closure  $next
+     * @return mixed
+     */
+    public function handle($request, Closure $next)
+    {
+        if($request->age < 18){
+            throw new Exception("Youre not eligible to vote");
+
+        }
+        return $next($request);
+    }
+}
+
+5. Bagian dari daftar-daftar middleware di app/Http/Kernel.php
+ protected $routeMiddleware = [
+        'auth' => \App\Http\Middleware\Authenticate::class,
+        'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
+        'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,
+        'cache.headers' => \Illuminate\Http\Middleware\SetCacheHeaders::class,
+        'can' => \Illuminate\Auth\Middleware\Authorize::class,
+        'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
+        'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
+        'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+        'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        'age' => \App\Http\Middleware\AgeMiddleware::class
+ ];
+
+Middleware untuk age terletak di plg bawah

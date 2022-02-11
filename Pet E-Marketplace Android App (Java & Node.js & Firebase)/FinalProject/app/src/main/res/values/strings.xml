@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">PawFriends</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="skip_login"><u>Lewati</u></string>
+    <string name="rajaongkirKey">73e2c36dbe7dd2f1da82882a0e2f7b3d</string>
+    <string name="facebook_app_id">1089520338235181</string>
+    <string name="fb_login_protocol_scheme">fb1089520338235181</string>
+</resources>

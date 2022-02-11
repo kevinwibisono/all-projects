@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="com.example.sellerapp.ThousandSeparator"/>
+        <import type="android.view.View"/>
+        <variable
+            name="viewmodel"
+            type="com.example.sellerapp.viewmodels.TarikSaldoViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".TarikSaldoActivity">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="visible">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/tbTarikSaldo"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:contentInsetStart="0dp"
+                app:contentInsetStartWithNavigation="0dp"
+                app:title="Penarikan"
+                android:theme="@style/ToolbarTheme"
+                app:titleTextColor="#ffffff"
+                app:navigationIcon="@drawable/ic_baseline_arrow_back_white_24" />
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="10dp">
+
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center_vertical"
+                        android:src="@drawable/warning" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:text="Perhatian! Setelah penarikan diajukan, maka penarikan akan segera diproses oleh admin dalam jangka waktu hingga 24 jam. Jika belum menerima, silahkan menghubungi 081331881608"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="10dp"
+                android:text="Jumlah Penarikan" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tlTarikSaldo"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                app:prefixText="Rp "
+                app:suffixText='@{viewmodel.saldo == null ? "" : "/ "+viewmodel.saldo}'>
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:text="@={viewmodel.tarikSaldo}"
+                    android:maxLength="@{String.valueOf(viewmodel.saldo).length()}"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Rekening Tujuan" />
+
+                <TextView
+                    android:id="@+id/openOtherRekening"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:text="Lainnya"
+                    android:textColor="#2196F3" />
+            </LinearLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="@{viewmodel.isRekeningLoading() ? View.GONE : View.VISIBLE, default=gone}">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:orientation="horizontal"
+                        android:visibility='@{viewmodel.rekNum.equals("") ? View.GONE : View.VISIBLE, default=gone}'>
+
+                        <ImageView
+                            android:id="@+id/ivTarikRek"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="10dp"
+                                android:text='@{"("+viewmodel.rekNum+")"}'
+                                android:textSize="16sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textStyle="italic"
+                                android:layout_marginStart="10dp"
+                                android:text='@{"a/n "+viewmodel.rekName}'/>
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:gravity="center_horizontal"
+                        android:text="Belum Ada Rekening Yang Dipilih"
+                        android:textColor="@android:color/holo_red_light"
+                        android:visibility='@{viewmodel.rekNum.equals("") ? View.VISIBLE : View.GONE, default=visible}'/>
+                </FrameLayout>
+
+                <ProgressBar
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="@{viewmodel.isRekeningLoading() ? View.VISIBLE : View.GONE, default=visible}"/>
+            </FrameLayout>
+
+
+        </LinearLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="Tarik Saldo"
+            android:enabled='@{viewmodel.tarikSaldo.equals("") ? false : viewmodel.saldo == null ? false : true, default=false}'
+            android:onClick="@{() -> viewmodel.tarikSaldo()}" />
+    </LinearLayout>
+</layout>
+

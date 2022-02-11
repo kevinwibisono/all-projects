@@ -1,0 +1,622 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="viewmodel"
+            type="com.example.sellerapp.viewmodels.SellerDetailViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".SellerDetailActivity">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/tbSellerDetail"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:contentInsetStart="0dp"
+                app:contentInsetStartWithNavigation="0dp"
+                app:title="@{viewmodel.getTitles[0]}"
+                android:visibility="@{viewmodel.isUpdating() == 1 ? View.GONE : View.VISIBLE, default=visible}"
+                android:theme="@style/ToolbarTheme"
+                app:titleTextColor="#ffffff"
+                app:navigationIcon="@drawable/ic_baseline_arrow_back_white_24" />
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/tbSellerUpdate"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:contentInsetStart="0dp"
+                app:contentInsetStartWithNavigation="0dp"
+                app:menu="@menu/menu_update"
+                app:title="@{viewmodel.getTitles[0]}"
+                android:visibility="@{viewmodel.isUpdating() == 1 ? View.VISIBLE: View.GONE, default=gone}"
+                android:theme="@style/ToolbarTheme"
+                app:titleTextColor="#ffffff"
+                app:navigationIcon="@drawable/ic_baseline_arrow_back_24" />
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <ScrollView
+            android:id="@+id/svSellerDetail"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:text="@{viewmodel.getTitles[1]}"
+                    android:textSize="14sp" />
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/ivSellerPhoto"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="10dp"
+                    android:background="#FFFFFF"
+                    android:scaleType="fitXY"
+                    app:shapeAppearanceOverlay="@style/circleImageView" />
+
+                <TextView
+                    android:id="@+id/tvErrorProfile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="10dp"
+                    android:textColor="@android:color/holo_red_light"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{viewmodel.getTitles[2]}"/>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/tlSellerName"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="20dp"
+                        android:layout_weight="1">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:singleLine="true"
+                            android:text="@={viewmodel.sellerName}" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{viewmodel.getTitles[3]}"/>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/tlSellerDesc"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="20dp"
+                        android:layout_weight="1">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:minLines="6"
+                            android:text="@={viewmodel.sellerDesc}" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <TextView
+                        android:id="@+id/tvSellerPosters"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{viewmodel.getTitles[4]}"
+                        android:layout_marginBottom="5dp"/>
+
+                    <TextView
+                        android:id="@+id/tvErrorPoster"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:textColor="@android:color/holo_red_light"/>
+
+                    <HorizontalScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
+
+                            <FrameLayout
+                                android:layout_width="300dp"
+                                android:layout_height="200dp"
+                                android:layout_marginEnd="10dp">
+
+                                <ImageView
+                                    android:id="@+id/ivPoster1"
+                                    android:layout_width="300dp"
+                                    android:layout_height="200dp" />
+
+                                <com.google.android.material.button.MaterialButton
+                                    android:id="@+id/btnDeletePoster1"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="bottom|center_horizontal"
+                                    android:layout_marginBottom="5dp"
+                                    android:minWidth="0dp"
+                                    android:minHeight="0dp"
+                                    android:text="Hapus"
+                                    android:visibility="@{viewmodel.getPictureBitmaps(1) != null ? View.VISIBLE : View.GONE, default=gone}"
+                                    app:backgroundTint="@android:color/darker_gray" />
+                            </FrameLayout>
+
+                            <FrameLayout
+                                android:layout_width="300dp"
+                                android:layout_height="200dp"
+                                android:layout_marginEnd="10dp">
+
+                                <ImageView
+                                    android:id="@+id/ivPoster2"
+                                    android:layout_width="300dp"
+                                    android:layout_height="200dp" />
+
+                                <com.google.android.material.button.MaterialButton
+                                    android:id="@+id/btnDeletePoster2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:minWidth="0dp"
+                                    android:minHeight="0dp"
+                                    app:backgroundTint="@android:color/darker_gray"
+                                    android:layout_gravity="bottom|center_horizontal"
+                                    android:layout_marginBottom="5dp"
+                                    android:visibility="@{viewmodel.getPictureBitmaps(2) != null ? View.VISIBLE : View.GONE, default=gone}"
+                                    android:text="Hapus"/>
+                            </FrameLayout>
+
+                            <FrameLayout
+                                android:layout_width="300dp"
+                                android:layout_height="200dp"
+                                android:layout_marginEnd="10dp">
+
+                                <ImageView
+                                    android:id="@+id/ivPoster3"
+                                    android:layout_width="300dp"
+                                    android:layout_height="200dp" />
+
+                                <com.google.android.material.button.MaterialButton
+                                    android:id="@+id/btnDeletePoster3"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:minWidth="0dp"
+                                    android:minHeight="0dp"
+                                    app:backgroundTint="@android:color/darker_gray"
+                                    android:layout_gravity="bottom|center_horizontal"
+                                    android:layout_marginBottom="5dp"
+                                    android:visibility="@{viewmodel.getPictureBitmaps(3) != null ? View.VISIBLE : View.GONE, default=gone}"
+                                    android:text="Hapus"/>
+                            </FrameLayout>
+
+                            <FrameLayout
+                                android:layout_width="300dp"
+                                android:layout_height="200dp"
+                                android:layout_marginEnd="10dp">
+
+                                <ImageView
+                                    android:id="@+id/ivPoster4"
+                                    android:layout_width="300dp"
+                                    android:layout_height="200dp" />
+
+                                <com.google.android.material.button.MaterialButton
+                                    android:id="@+id/btnDeletePoster4"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:minWidth="0dp"
+                                    android:minHeight="0dp"
+                                    app:backgroundTint="@android:color/darker_gray"
+                                    android:layout_gravity="bottom|center_horizontal"
+                                    android:layout_marginBottom="5dp"
+                                    android:visibility="@{viewmodel.getPictureBitmaps(4) != null ? View.VISIBLE : View.GONE, default=gone}"
+                                    android:text="Hapus"/>
+                            </FrameLayout>
+                        </LinearLayout>
+                    </HorizontalScrollView>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="@{viewmodel.role == 0 ? View.VISIBLE : View.GONE, default=gone}">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="10dp"
+                        android:background="#F1F1F1"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="10dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Pengatuan Pengiriman"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:layout_marginBottom="10dp"/>
+
+                        <TextView
+                            android:id="@+id/tvErrorCourier"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="10dp"
+                            android:textColor="@android:color/holo_red_light"/>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginBottom="10dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_weight="1">
+
+                                <CheckBox
+                                    android:id="@+id/cbSelfPickup"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:minWidth="0dp"
+                                    android:minHeight="0dp"
+                                    android:checked="@{viewmodel.couriersCheck[0]}"/>
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:src="@drawable/self_pickup"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Self Pickup"/>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_weight="1">
+
+                                <CheckBox
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:minWidth="0dp"
+                                    android:minHeight="0dp"
+                                    android:checked="@={viewmodel.couriersCheck[1]}"/>
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:src="@drawable/logo_jne"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="JNE"/>
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginBottom="10dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_weight="1">
+
+                                <CheckBox
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:minWidth="0dp"
+                                    android:minHeight="0dp"
+                                    android:checked="@={viewmodel.couriersCheck[2]}" />
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:src="@drawable/logo_pos"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Pos Indonesia"/>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_weight="1">
+
+                                <CheckBox
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:minWidth="0dp"
+                                    android:minHeight="0dp"
+                                    android:checked="@={viewmodel.couriersCheck[3]}" />
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:src="@drawable/logo_tiki"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="TIKI"/>
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_margin="10dp"
+                    android:visibility="@{viewmodel.couriersCheck[0] ? View.VISIBLE : View.GONE, default=gone}">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Alamat Toko" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/tlShopAddress"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="10dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edShopAddress"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:clickable="true"
+                            android:focusable="false"
+                            android:text="@{viewmodel.alamat}"
+                            android:onClick="startAddressPicker"/>
+
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="@{viewmodel.role == 3 ? View.VISIBLE : View.GONE, default=gone}">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="10dp"
+                        android:background="#F1F1F1"/>
+
+                    <LinearLayout
+                        android:id="@+id/partClinicAppo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="10dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Pengatuan Klinik"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:layout_marginBottom="10dp"/>
+
+                        <LinearLayout
+                            android:id="@+id/addressTimeClinic"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="20dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Alamat Klinik" />
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/tlClinicAddress"
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="10dp"
+                                android:layout_marginBottom="20dp">
+
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/edClinicAddress"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:clickable="true"
+                                    android:focusable="false"
+                                    android:text="@{viewmodel.alamat}"
+                                    android:onClick="startAddressPicker"/>
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="10dp"
+                                android:text="Jam Buka Klinik" />
+
+                            <TextView
+                                android:id="@+id/tvErrorAppoSchedules"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="10dp"
+                                android:textColor="@android:color/holo_red_light"/>
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/rvClinicSchedule"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"/>
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/tvClinicAppo"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Pengatuan Janji Temu"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:layout_marginBottom="10dp"/>
+
+                        <TextView
+                            android:id="@+id/tvErrorAppo"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="10dp"
+                            android:textColor="@android:color/holo_red_light"/>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginBottom="10dp">
+
+                            <CheckBox
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:checked="@={viewmodel.appoTypeCheck[0]}"
+                                android:minWidth="0dp"
+                                android:minHeight="0dp"
+                                android:text="Datang Ke Klinik" />
+
+                            <CheckBox
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:minWidth="0dp"
+                                android:minHeight="0dp"
+                                android:layout_weight="1"
+                                android:checked="@={viewmodel.appoTypeCheck[1]}"
+                                android:text="Home Visit" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="10dp"
+                    android:visibility="@{viewmodel.role == 1 ? View.VISIBLE : View.GONE, default=gone}">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="10dp"
+                        android:background="#F1F1F1"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Paket-Paket Grooming"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"/>
+
+                    <TextView
+                        android:id="@+id/tvErrorGroom"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:textColor="@android:color/holo_red_light"/>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvGroomingPackages"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="10dp"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnAddGroomerPack"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:backgroundTint="#FFFFFF"
+                        android:insetTop="0dp"
+                        android:insetBottom="0dp"
+                        android:minWidth="0dp"
+                        android:minHeight="0dp"
+                        app:icon="@drawable/ic_baseline_add_36"
+                        app:iconPadding="0dp"
+                        app:iconTint="#969696"
+                        app:strokeColor="#969696"
+                        app:strokeWidth="1dp"/>
+
+                </LinearLayout>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnSellerSave"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:text="Simpan"
+                    android:visibility="@{viewmodel.isUpdating() == 1 ? View.GONE: View.VISIBLE, default=gone}"/>
+
+            </LinearLayout>
+
+        </ScrollView>
+
+    </LinearLayout>
+</layout>
+

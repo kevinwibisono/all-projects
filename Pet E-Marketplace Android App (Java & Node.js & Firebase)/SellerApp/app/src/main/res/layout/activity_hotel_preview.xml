@@ -1,0 +1,575 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="viewmodel"
+            type="com.example.sellerapp.viewmodels.HotelPreviewViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".HotelPreviewActivity">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/tbHotelPreview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:contentInsetStart="0dp"
+                app:contentInsetStartWithNavigation="0dp"
+                app:title="Tampilan Kamar"
+                android:theme="@style/ToolbarTheme"
+                app:titleTextColor="#ffffff"
+                app:navigationIcon="@drawable/ic_baseline_arrow_back_white_24">
+
+            </com.google.android.material.appbar.MaterialToolbar>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="@{viewmodel.isDeleted() ? View.GONE : View.VISIBLE, default=visible}">
+
+            <androidx.core.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:descendantFocusability="blocksDescendants"
+                    android:orientation="vertical">
+
+                    <com.denzcoskun.imageslider.ImageSlider
+                        android:id="@+id/sliderHotelDetail"
+                        android:layout_width="match_parent"
+                        android:layout_height="300dp"
+                        app:iss_auto_cycle="false"
+                        app:iss_title_background="@android:color/transparent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:padding="10dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="10dp"
+                            android:layout_weight="1"
+                            android:text="@{viewmodel.nama}"
+                            android:textColor="#000000"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal"
+                            android:paddingTop="5dp">
+
+                            <com.google.android.material.imageview.ShapeableImageView
+                                android:id="@+id/ivHotelOwner"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:background="#FFFFFF"
+                                android:scaleType="fitXY"
+                                app:shapeAppearanceOverlay="@style/circleImageView"
+                                app:srcCompat="@drawable/ic_baseline_account_circle_24" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginStart="10dp"
+                                android:text="@{viewmodel.namaPenjual}" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text='@{"Rp " +viewmodel.harga}'
+                                android:textColor="@android:color/holo_green_dark"
+                                android:textSize="18sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=" / malam" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Sisa" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginEnd="5dp"
+                                android:text="@{viewmodel.sisa}"
+                                android:textColor="#000000"
+                                android:textSize="18sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="kamar" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:orientation="horizontal"
+                            android:visibility="@{viewmodel.revVMs.size() > 0 ? View.VISIBLE : View.GONE, default=gone}">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:id="@+id/hotelStar1"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:src="@drawable/ic_baseline_star_20" />
+
+                                <ImageView
+                                    android:id="@+id/hotelStar2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:src="@drawable/ic_baseline_star_20" />
+
+                                <ImageView
+                                    android:id="@+id/hotelStar3"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:src="@drawable/ic_baseline_star_20" />
+
+                                <ImageView
+                                    android:id="@+id/hotelStar4"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:src="@drawable/ic_baseline_star_20" />
+
+                                <ImageView
+                                    android:id="@+id/hotelStar5"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:src="@drawable/ic_baseline_star_20" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="5dp"
+                                    android:text="@{viewmodel.nilai}"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="5dp"
+                                    android:text='@{"("+viewmodel.revVMs.size()+")"}' />
+                            </LinearLayout>
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:text="Fasilitas"
+                        android:textColor="#000000"
+                        android:textSize="18sp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <com.google.android.material.chip.ChipGroup
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="10dp">
+
+                            <com.google.android.material.chip.Chip
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="3dp"
+                                android:checkable="false"
+                                android:text="Makanan &amp; Minuman"
+                                android:textSize="12sp"
+                                android:visibility="@{viewmodel.isFacsIncluded()[0] ? View.VISIBLE : View.GONE, default=gone}"
+                                app:chipBackgroundColor="#FFFFFF"
+                                app:chipIcon="@drawable/ic_baseline_fastfood_24"
+                                app:chipStrokeWidth="1dp"
+                                app:iconStartPadding="5dp" />
+
+                            <com.google.android.material.chip.Chip
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="3dp"
+                                android:checkable="false"
+                                android:text="Ber-AC"
+                                android:textSize="12sp"
+                                android:visibility="@{viewmodel.isFacsIncluded()[1] ? View.VISIBLE : View.GONE, default=gone}"
+                                app:chipBackgroundColor="#FFFFFF"
+                                app:chipIcon="@drawable/ac"
+                                app:chipStrokeWidth="1dp"
+                                app:iconStartPadding="5dp" />
+
+                            <com.google.android.material.chip.Chip
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="3dp"
+                                android:checkable="false"
+                                android:text="Kamar Privat"
+                                android:textSize="12sp"
+                                android:visibility="@{viewmodel.isFacsIncluded()[2] ? View.VISIBLE : View.GONE, default=gone}"
+                                app:chipBackgroundColor="#FFFFFF"
+                                app:chipIcon="@drawable/ic_baseline_person_add_disabled_24"
+                                app:chipStrokeWidth="1dp"
+                                app:iconStartPadding="5dp" />
+
+                            <com.google.android.material.chip.Chip
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="3dp"
+                                android:checkable="false"
+                                android:text="Akses CCTV"
+                                android:textSize="12sp"
+                                android:visibility="@{viewmodel.isFacsIncluded()[3] ? View.VISIBLE : View.GONE, default=gone}"
+                                app:chipBackgroundColor="#FFFFFF"
+                                app:chipIcon="@drawable/ic_baseline_photo_camera_24"
+                                app:chipStrokeWidth="1dp"
+                                app:iconStartPadding="5dp" />
+
+                            <com.google.android.material.chip.Chip
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="3dp"
+                                android:checkable="false"
+                                android:text="Update Harian"
+                                android:textSize="12sp"
+                                android:visibility="@{viewmodel.isFacsIncluded()[4] ? View.VISIBLE : View.GONE, default=gone}"
+                                app:chipBackgroundColor="#FFFFFF"
+                                app:chipIcon="@drawable/ic_baseline_calendar_today_24"
+                                app:chipStrokeWidth="1dp"
+                                app:iconStartPadding="5dp" />
+
+                            <com.google.android.material.chip.Chip
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="3dp"
+                                android:checkable="false"
+                                android:text="Taman Bermain"
+                                android:textSize="12sp"
+                                android:visibility="@{viewmodel.isFacsIncluded()[5] ? View.VISIBLE : View.GONE, default=gone}"
+                                app:chipBackgroundColor="#FFFFFF"
+                                app:chipIcon="@drawable/parkicon"
+                                app:chipStrokeWidth="1dp"
+                                app:iconStartPadding="5dp" />
+
+                            <com.google.android.material.chip.Chip
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="3dp"
+                                android:checkable="false"
+                                android:text="Training &amp;  Olahraga"
+                                android:textSize="12sp"
+                                android:visibility="@{viewmodel.isFacsIncluded()[6] ? View.VISIBLE : View.GONE, default=gone}"
+                                app:chipBackgroundColor="#FFFFFF"
+                                app:chipIcon="@drawable/ic_baseline_fitness_center_24"
+                                app:chipStrokeWidth="1dp"
+                                app:iconStartPadding="5dp" />
+
+                            <com.google.android.material.chip.Chip
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="3dp"
+                                android:checkable="false"
+                                android:text="Antar Jemput"
+                                android:textSize="12sp"
+                                android:visibility="@{viewmodel.isFacsIncluded()[7] ? View.VISIBLE : View.GONE, default=gone}"
+                                app:chipBackgroundColor="#FFFFFF"
+                                app:chipIcon="@drawable/ic_baseline_airport_shuttle_24"
+                                app:chipStrokeWidth="1dp"
+                                app:iconStartPadding="5dp" />
+
+                            <com.google.android.material.chip.Chip
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="3dp"
+                                android:checkable="false"
+                                android:text="Grooming"
+                                android:textSize="12sp"
+                                android:visibility="@{viewmodel.isFacsIncluded()[8] ? View.VISIBLE : View.GONE, default=gone}"
+                                app:chipBackgroundColor="#FFFFFF"
+                                app:chipIcon="@drawable/shower"
+                                app:chipStrokeWidth="1dp"
+                                app:iconStartPadding="5dp" />
+                        </com.google.android.material.chip.ChipGroup>
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:padding="10dp"
+                        android:text="Ukuran Kamar"
+                        android:textColor="#000000"
+                        android:textSize="18sp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="10dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="± " />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text='@{viewmodel.length+" meter"}'
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=" (panjang) x " />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text='@{viewmodel.width+" meter"}'
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=" (lebar)" />
+
+                    </LinearLayout>
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:text="Deskripsi"
+                        android:textColor="#000000"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/textView32"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:padding="10dp"
+                        android:text="@{viewmodel.desc}" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="10dp"
+                        android:background="#FAFAFA" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="10dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+
+                                android:layout_weight="1"
+                                android:text="Komentar Pelanggan"
+                                android:textColor="#000000"
+                                android:textSize="18sp" />
+
+                            <TextView
+                                android:id="@+id/petHotelSeeDiscuss"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Lihat Diskusi"
+                                android:textColor="#2196F3" />
+                        </LinearLayout>
+
+                        <com.google.android.material.tabs.TabLayout
+                            android:id="@+id/tabsHotelReviewStar"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:tabMode="scrollable">
+
+                            <com.google.android.material.tabs.TabItem
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Semua" />
+
+                            <com.google.android.material.tabs.TabItem
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Bintang 5" />
+
+                            <com.google.android.material.tabs.TabItem
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Bintang 4" />
+
+                            <com.google.android.material.tabs.TabItem
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Bintang 3" />
+
+                            <com.google.android.material.tabs.TabItem
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Bintang 2" />
+
+                            <com.google.android.material.tabs.TabItem
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Bintang 1" />
+                        </com.google.android.material.tabs.TabLayout>
+
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:minHeight="175dp">
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/rvHotelReviews"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:visibility="@{viewmodel.revVMs.size() > 0 ? View.VISIBLE : View.GONE, default=visible}"
+                                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_marginTop="30dp"
+                                android:text="Belum Ada Ulasan Untuk Saat Ini"
+                                android:visibility="@{viewmodel.revVMs.size() > 0 ? View.GONE : View.VISIBLE, default=gone}" />
+
+                            <ProgressBar
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_marginTop="10dp"
+                                android:visibility="@{viewmodel.isReviewsLoading() ? View.VISIBLE : View.GONE, default=visible}" />
+                        </FrameLayout>
+
+                        <TextView
+                            android:id="@+id/petHotelSeeReviews"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_margin="20dp"
+                            android:text="Lihat Semua Ulasan"
+                            android:textColor="#2196F3" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </androidx.core.widget.NestedScrollView>
+
+            <androidx.coordinatorlayout.widget.CoordinatorLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.bottomappbar.BottomAppBar
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnUpdateHotel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="10dp"
+                        android:text="Ubah Kamar"
+                        app:backgroundTint="#8BC34A" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnHotelReviews"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Balas Ulasan"
+                        android:textSize="12sp"
+                        app:backgroundTint="#FF9800" />
+                </com.google.android.material.bottomappbar.BottomAppBar>
+            </androidx.coordinatorlayout.widget.CoordinatorLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="@{viewmodel.isDeleted() ? View.VISIBLE : View.GONE, default=gone}">
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/saddog" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:text="Waduh, Kamar Tidak Ditemukan"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:text="Kamu Tidak Dapat Melihat Kamar Yang Telah Dihapus" />
+        </LinearLayout>
+    </LinearLayout>
+</layout>
+

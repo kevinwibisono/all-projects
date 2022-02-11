@@ -1,0 +1,12 @@
+Install Windows: 
+https://www.enterprisedb.com/downloads/postgres-postgresql-downloads
+
+Syntax:
+\dt => list all tables in a db
+select column_name, data_type, character_maximum_length from INFORMATION_SCHEMA.COLUMNS where table_name = '<table-name>'; => untuk desc sebuah table
+ALTER TABLE table_name ALTER COLUMN column_name [SET DATA] TYPE new_data_type; => untuk ubah tipe field column
+DROP TABLE <table-name> => postgre tdk mengenal cascade constraint dan purge
+
+Catatan:
+int diganti dgn integer dan tidak diberi size
+untuk auto_increment menggunakan tipe field SERIAL

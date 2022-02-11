@@ -1,0 +1,19 @@
+1. Berbasis web (PHP)
+2. Tema: Software Development Scheduling
+3. Gantt chart
+4. Akan ditampilkan di android
+5. Terdapat header, yang berisi anggota tim yang dikerahkan, value project, customer, dll
+6. Detail/proses berisi: tenggat waktu, apa yang harus dilakukan
+7. Masing-masing proses dapat terganggu waktunya (jika terganggu, harus diberi tanda)
+
+Tanyakan:
+1. Jika detail sudah selesai end date nya, apakah masih bisa diedit, ditambah detail level 2 baru
+2. Apakah adjust detail level 2 harus melalui detail level 1, jika iya, lalu letak adjustnya dmn?
+
+Domain hosting: calendar.databasket.online
+
+Saran keras:
+1. SEBISA MUNGKIN gunakan ajax untuk me-load data query, jangan gunakan php (jika data sangat besar, misal lbh dr 100rb maka akan sangat lama dalam load page)
+2. SEBISA MUNGKIN JANGAN ubah element-element yang sudah bawah an dari template nya (cth: menggunakan inline css untuk mengatur ukuran, dll)
+3. PELAJARI salah satu alert yang bagus, contoh sweetalert atau google material design
+4. BIASAKAN sediakan minimal 1 file jika ada function atau pengecekan, dll yang dipanggil di lbh dr 1 halaman, sehingga di halaman-halaman yang ada hanya tinggal pakai/include

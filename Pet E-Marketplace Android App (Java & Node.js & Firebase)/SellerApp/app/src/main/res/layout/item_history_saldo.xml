@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <import type="com.example.sellerapp.ThousandSeparator"/>
+        <import type="android.view.View"/>
+        <variable
+            name="viewmodel"
+            type="com.example.sellerapp.viewmodels.itemviewmodels.RiwayatItemViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            app:cardElevation="5dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:text="@{viewmodel.keterangan}"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:text='@{viewmodel.tanggal}' />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:textSize="18sp"
+                    android:text='@{viewmodel.jenis == 0 ? "+ Rp "+ThousandSeparator.getTS(viewmodel.jumlah) : viewmodel.jenis == 1 ? "- Rp "+ThousandSeparator.getTS(viewmodel.jumlah) : "Rp "+ThousandSeparator.getTS(viewmodel.jumlah), default=""}'
+                    android:textColor="@{viewmodel.jenis == 0 ? @android:color/holo_green_light : viewmodel.jenis == 1 ? @android:color/holo_red_light : @android:color/primary_text_light, default=@android:color/primary_text_light}"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:gravity="right"
+                    android:orientation="vertical"
+                    android:visibility="@{viewmodel.jenis == 2 ? View.VISIBLE : View.GONE, default=gone}">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/ivHistoryRek"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text='@{"("+viewmodel.noRek+")"}'
+                            android:textSize="16sp" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textStyle="italic"
+                        android:text='@{"a/n "+viewmodel.namaRek}'/>
+
+                    <TextView
+                        android:id="@+id/tvRiwayatBuktiTrf"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Lihat Bukti Transfer"
+                        android:textColor="@android:color/holo_blue_light"
+                        android:visibility='@{viewmodel.gambar_bukti().equals("") ? View.GONE : View.VISIBLE, default=gone}'/>
+
+                </LinearLayout>
+            </LinearLayout>
+
+
+        </com.google.android.material.card.MaterialCardView>
+    </LinearLayout>
+</layout>
+

@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="my.istts.finalproject">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/applogo"
+        android:label="@string/app_name"
+        android:roundIcon="@drawable/applogo"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name="my.istts.finalproject.ComplainsActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="my.istts.finalproject.ReviewListActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="my.istts.finalproject.SearchSellerItemsActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="my.istts.finalproject.GroomerLocationActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="my.istts.finalproject.LikedActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="my.istts.finalproject.AddRekeningActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="my.istts.finalproject.TarikSaldoActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="my.istts.finalproject.SaldoActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="my.istts.finalproject.RekeningListActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="my.istts.finalproject.ReviewActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="my.istts.finalproject.AddDiscussActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="my.istts.finalproject.FollowActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="my.istts.finalproject.AddAppoItemActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="my.istts.finalproject.UnfinishedPaymentListActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="my.istts.finalproject.FinishPaymentActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
+            android:theme="@style/Base.Theme.AppCompat" />
+        <activity android:name="my.istts.finalproject.ComplainDetailActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="my.istts.finalproject.AddComplainActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="my.istts.finalproject.VoucherListActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="my.istts.finalproject.FullDiscussionActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="my.istts.finalproject.VoucherDetailActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="my.istts.finalproject.HotelCheckoutActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="my.istts.finalproject.RegisterActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="my.istts.finalproject.AddressSearchActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="my.istts.finalproject.AddAddressActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="my.istts.finalproject.AddAdoptionActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="my.istts.finalproject.AddressChooseActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="my.istts.finalproject.AppointmentDetailActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="my.istts.finalproject.OrderDetailActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="my.istts.finalproject.OrderListActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="OPEN_ACTIVITY_ORDER" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name="my.istts.finalproject.AppointmentActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="my.istts.finalproject.ClinicListActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="my.istts.finalproject.DiscussActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="my.istts.finalproject.DiscussListActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="my.istts.finalproject.PetAdoptDetailActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="my.istts.finalproject.GroomingCheckoutActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="my.istts.finalproject.ProductCheckoutActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="my.istts.finalproject.SellerProfileActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="my.istts.finalproject.ConversationsActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="OPEN_ACTIVITY_CHAT" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name="my.istts.finalproject.ChatActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="my.istts.finalproject.HotelDetailActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="my.istts.finalproject.PetAdoptActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="my.istts.finalproject.HotelActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="my.istts.finalproject.ArticlesListActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="my.istts.finalproject.ArticleActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="my.istts.finalproject.FavoriteActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="my.istts.finalproject.CartActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="my.istts.finalproject.ShopCategoryActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="my.istts.finalproject.PetProductActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="my.istts.finalproject.ShoppingActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="my.istts.finalproject.GroomerListActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="my.istts.finalproject.SearchActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="my.istts.finalproject.ImageViewerActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="my.istts.finalproject.MainActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="my.istts.finalproject.LoginActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <service
+            android:name="my.istts.finalproject.NotificationService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        <service android:name="my.istts.finalproject.TimeService" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="my.istts.finalproject.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
+        <meta-data
+            android:name="com.here.sdk.access_key_id"
+            android:value="GgH4mEToRwWivHBIohrmyg" />
+        <meta-data
+            android:name="com.here.sdk.access_key_secret"
+            android:value="zGIbXpmbm7rKak9vTcgCUhtgUsS27c_uANlQryyq7QDBgbTwFBuiO61EPqnIu3sDW2x7Aumnc9DbBgdPcU4-BQ" />
+    </application>
+
+</manifest>

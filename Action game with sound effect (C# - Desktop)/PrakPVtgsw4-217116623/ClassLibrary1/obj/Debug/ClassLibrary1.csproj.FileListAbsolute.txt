@@ -1,0 +1,12 @@
+C:\Users\User\Documents\Pemrograman Visual\PrakPV2018\M4\PrakPVtgsw4-217116623\ClassLibrary1\bin\Debug\ClassLibrary1.dll
+C:\Users\User\Documents\Pemrograman Visual\PrakPV2018\M4\PrakPVtgsw4-217116623\ClassLibrary1\bin\Debug\ClassLibrary1.pdb
+C:\Users\User\Documents\Pemrograman Visual\PrakPV2018\M4\PrakPVtgsw4-217116623\ClassLibrary1\obj\Debug\ClassLibrary1.csprojResolveAssemblyReference.cache
+C:\Users\User\Documents\Pemrograman Visual\PrakPV2018\M4\PrakPVtgsw4-217116623\ClassLibrary1\obj\Debug\ClassLibrary1.csproj.CoreCompileInputs.cache
+C:\Users\User\Documents\Pemrograman Visual\PrakPV2018\M4\PrakPVtgsw4-217116623\ClassLibrary1\obj\Debug\ClassLibrary1.dll
+C:\Users\User\Documents\Pemrograman Visual\PrakPV2018\M4\PrakPVtgsw4-217116623\ClassLibrary1\obj\Debug\ClassLibrary1.pdb
+C:\Users\Kevin\Documents\Kuliah\Pemrograman Visual\PrakPV2018\M4\PrakPVtgsw4-217116623\ClassLibrary1\bin\Debug\ClassLibrary1.dll
+C:\Users\Kevin\Documents\Kuliah\Pemrograman Visual\PrakPV2018\M4\PrakPVtgsw4-217116623\ClassLibrary1\bin\Debug\ClassLibrary1.pdb
+C:\Users\Kevin\Documents\Kuliah\Pemrograman Visual\PrakPV2018\M4\PrakPVtgsw4-217116623\ClassLibrary1\obj\Debug\ClassLibrary1.csprojAssemblyReference.cache
+C:\Users\Kevin\Documents\Kuliah\Pemrograman Visual\PrakPV2018\M4\PrakPVtgsw4-217116623\ClassLibrary1\obj\Debug\ClassLibrary1.csproj.CoreCompileInputs.cache
+C:\Users\Kevin\Documents\Kuliah\Pemrograman Visual\PrakPV2018\M4\PrakPVtgsw4-217116623\ClassLibrary1\obj\Debug\ClassLibrary1.dll
+C:\Users\Kevin\Documents\Kuliah\Pemrograman Visual\PrakPV2018\M4\PrakPVtgsw4-217116623\ClassLibrary1\obj\Debug\ClassLibrary1.pdb

@@ -1,0 +1,461 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="viewmodel"
+            type="com.example.sellerapp.viewmodels.ProductViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".ProductActivity">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/tbProductAdd"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:navigationIcon="@drawable/ic_baseline_arrow_back_white_24"
+                app:title='@{viewmodel.isUpdating() ? "Ubah Produk" : "Tambah Produk", default=""}'
+                android:theme="@style/ToolbarTheme"
+                app:titleTextColor="#ffffff" />
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/svProducts"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Gambar Produk" />
+
+                <TextView
+                    android:id="@+id/tvProductErrorPicture"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:textColor="@android:color/holo_red_light"
+                    android:visibility="gone"/>
+
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <FrameLayout
+                            android:layout_width="150dp"
+                            android:layout_height="150dp"
+                            android:layout_marginEnd="10dp">
+
+                            <ImageView
+                                android:id="@+id/productPicture1"
+                                android:layout_width="150dp"
+                                android:layout_height="150dp" />
+
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/btnDeletePicture1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:minWidth="0dp"
+                                android:minHeight="0dp"
+                                app:backgroundTint="@android:color/darker_gray"
+                                android:textSize="12sp"
+                                android:layout_gravity="bottom|center_horizontal"
+                                android:layout_marginBottom="5dp"
+                                android:visibility="@{viewmodel.getPicture(0) != null ? View.VISIBLE : View.GONE, default=gone}"
+                                android:text="Hapus"/>
+                        </FrameLayout>
+
+                        <FrameLayout
+                            android:layout_width="150dp"
+                            android:layout_height="150dp"
+                            android:layout_marginEnd="10dp">
+
+                            <ImageView
+                                android:id="@+id/productPicture2"
+                                android:layout_width="150dp"
+                                android:layout_height="150dp" />
+
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/btnDeletePicture2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:minWidth="0dp"
+                                android:minHeight="0dp"
+                                app:backgroundTint="@android:color/darker_gray"
+                                android:textSize="12sp"
+                                android:layout_gravity="bottom|center_horizontal"
+                                android:layout_marginBottom="5dp"
+                                android:visibility="@{viewmodel.getPicture(1) != null ? View.VISIBLE : View.GONE, default=gone}"
+                                android:text="Hapus"/>
+                        </FrameLayout>
+
+                        <FrameLayout
+                            android:layout_width="150dp"
+                            android:layout_height="150dp"
+                            android:layout_marginEnd="10dp">
+
+                            <ImageView
+                                android:id="@+id/productPicture3"
+                                android:layout_width="150dp"
+                                android:layout_height="150dp" />
+
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/btnDeletePicture3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:minWidth="0dp"
+                                android:minHeight="0dp"
+                                app:backgroundTint="@android:color/darker_gray"
+                                android:textSize="12sp"
+                                android:layout_gravity="bottom|center_horizontal"
+                                android:layout_marginBottom="5dp"
+                                android:visibility="@{viewmodel.getPicture(2) != null ? View.VISIBLE : View.GONE, default=gone}"
+                                android:text="Hapus"/>
+                        </FrameLayout>
+
+                        <FrameLayout
+                            android:layout_width="150dp"
+                            android:layout_height="150dp"
+                            android:layout_marginEnd="10dp">
+
+                            <ImageView
+                                android:id="@+id/productPicture4"
+                                android:layout_width="150dp"
+                                android:layout_height="150dp" />
+
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/btnDeletePicture4"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:minWidth="0dp"
+                                android:minHeight="0dp"
+                                app:backgroundTint="@android:color/darker_gray"
+                                android:textSize="12sp"
+                                android:layout_gravity="bottom|center_horizontal"
+                                android:layout_marginBottom="5dp"
+                                android:visibility="@{viewmodel.getPicture(3) != null ? View.VISIBLE : View.GONE, default=gone}"
+                                android:text="Hapus"/>
+                        </FrameLayout>
+                    </LinearLayout>
+                </HorizontalScrollView>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:text="Nama Produk" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tlProductName"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:text="@={viewmodel.inputs.nama}"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:text="Kategori Produk" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tlProductKat"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/autoCompleteKategori"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="none"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Aktifkan Variasi"
+                        android:layout_marginEnd="10dp"/>
+
+                    <com.google.android.material.switchmaterial.SwitchMaterial
+                        android:id="@+id/variasiSwitch"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:autoSizePresetSizes="0dp"
+                        android:checked="@{viewmodel.isVariantsActivated}"
+                        android:minWidth="0dp"
+                        android:minHeight="0dp" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tvProductErrorVariant"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/holo_red_light"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:visibility="gone"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:visibility="@{viewmodel.variantsActivated ? View.GONE : View.VISIBLE, default=visible}">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="10dp"
+                            android:text="Harga Produk" />
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/tlProductPrice"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="20dp"
+                            app:prefixText="Rp ">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="number"
+                                android:maxLength="8"
+                                android:text="@={viewmodel.inputs.harga}" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="10dp"
+                            android:text="Stok" />
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/tlProductStock"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="20dp">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="number"
+                                android:maxLength="8"
+                                android:text="@={viewmodel.inputs.stok}" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="@{viewmodel.variantsActivated ? View.VISIBLE : View.GONE, default=gone}">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvVariasi"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="#FAFAFA"/>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="20dp"
+                        android:orientation="horizontal">
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnAddVariasi"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:backgroundTint="#FFFFFF"
+                            android:insetTop="0dp"
+                            android:insetBottom="0dp"
+                            android:minWidth="0dp"
+                            android:minHeight="0dp"
+                            app:icon="@drawable/ic_baseline_add_36"
+                            app:iconPadding="0dp"
+                            app:iconTint="#969696"
+                            app:strokeColor="#969696"
+                            app:strokeWidth="1dp"/>
+
+                        <ImageView
+                            android:id="@+id/ivVariasiPictureHolder"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:visibility="gone"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:text="Berat Produk" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tlProductWeight"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:suffixText=" gram"
+                    android:layout_marginBottom="20dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:maxLength="8"
+                        android:text="@={viewmodel.inputs.berat}" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:text="Deskripsi Produk" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tlProductDesc"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minLines="6"
+                        android:text="@={viewmodel.inputs.deskripsi}"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.button.MaterialButton
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginTop="10dp"
+                    android:text="Tambahkan Produk"
+                    app:backgroundTint="#673AB7"
+                    android:visibility="@{viewmodel.isUpdating() ? View.GONE : View.VISIBLE, default=visible}"
+                    android:onClick="@{() -> viewmodel.addProduct()}"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="@{viewmodel.getProduct() != null ? View.VISIBLE : View.GONE, default=gone}">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginTop="10dp"
+                        android:text="Ubah Produk"
+                        app:backgroundTint="#673AB7"
+                        android:onClick="@{() -> viewmodel.addProduct()}"/>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginTop="10dp"
+                        android:text="Aktifkan Produk"
+                        android:visibility="@{viewmodel.isProductActive() ? View.GONE : View.VISIBLE, default=gone}"
+                        android:onClick="@{() -> viewmodel.activateProduct()}"
+                        app:backgroundTint="@android:color/holo_green_light" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginTop="10dp"
+                        android:text="Nonaktifkan Produk"
+                        android:visibility="@{viewmodel.isProductActive() ? View.VISIBLE : View.GONE, default=visible}"
+                        android:onClick="@{() -> viewmodel.activateProduct()}"
+                        app:backgroundTint="@android:color/holo_red_dark" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnProductDelete"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginTop="10dp"
+                        android:text="Hapus Produk"
+                        app:strokeWidth="2dp"
+                        app:strokeColor="@android:color/holo_red_dark"
+                        android:textColor="@android:color/holo_red_dark"
+                        app:backgroundTint="#FFFFFF"/>
+                </LinearLayout>
+
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+    </LinearLayout>
+</layout>
+

@@ -1,0 +1,52 @@
+Vue:
+1. Pertama install dulu node.js
+2. Di cmd, ketikkan "npm install -g @vue/cli"
+3. Ketika ingin membuat projek:
+   3.1. Cd ke directory yang diinginkan
+   3.2. Ketikkan "vue create [nama folder]", nama folder dpt diisi dengan . artinya projek vue akan dibuat pada folder directory ini
+   3.3. Pilih yang vue2(babel, eslint)
+   3.4. Tunggu hingga selesai
+4. Buka folder projek di vs code, kemudian install plugin vetur di vs code
+5. Ketika ingin menjalankan projek, maka di terminal vs code ketikkan "npm run serve"
+6. Ketika ingin menjalankan projek yang didownload dari github, biasanya folder node_modules akan hilang, maka ketikkan "npm install" terlebih dulu
+7. Gunakan library axios untuk menghandle http request (get, post, dll) untuk berkomunikasi dengan backend
+   7.1. axios bersifat ASYNC, oleh karena itu pemanggilan hrs didalam async function dan menggunakan await axios.{httpMethod}..... 
+
+Vue merupakan single page application, oleh karena itu jika ingin berpindah-pindah halaman membutuhkan router:
+1. Di cmd ketikkan "vue ui" untuk membuka halaman ui
+2. Cari projek yang ingin di-router
+3. Pada projek, kemudian ke plugins dan klik add vue-router
+
+Link youtube tutor: https://www.youtube.com/watch?v=Wy9q22isx3U
+
+=================================================================================================================
+Vuex:
+1. LANJUTAN dari vue
+2. Cara membuat projek, cara kerja komponen sama dengan vue
+2. Merupakan state management dari vue
+3. Memudahkan dalam melakukan operasi CRUD
+
+Link youtube tutor: https://www.youtube.com/watch?v=5lVQgZzLMHc
+=================================================================================================================
+Nuxt:
+1. LANJUTAN dari vue
+2. Untuk membuat projek harus menginstall node js dan vue cli terlebih dahulu
+3. Ketika ingin membuat projek:
+   3.1. Cd ke directory yang diinginkan
+   3.2. Ketikkan "npx create-nuxt-app [nama folder]"
+   3.3. Pilih opsi-opsi yang ada seperti bahasa yang digunakan, library yang ingin diinstall
+   3.4. Tunggu hingga selesai
+4. Ketika membuka di vscode, maka untuk menjalankan ketikkan "npm run dev" atau ("npm run build" kemudian "npm run start")
+5. Sama seperti vue, ketika mendownload dari github maka harus npm install terlebih dahulu
+6. Seluruh file seperti image, css, atau js letakkan pada folder static
+   Contoh: (file-file js diletakkan pada folder js, file-file css diletakkan pada folder css, dsb)
+   6.1. Jika ingin import js atau css maka pada app.template.html pada folder .nuxt letakkan script pada body serta style pada head
+   6.2. Sebagai contoh: <script src='js/jquery.min.js'></script> atau <link rel='stylesheet' href='css/w3school.css'></script>
+7. Pada nuxt, halaman utama terdapat pada folder layout:
+   7.1. Pada saat pertama kali membuat maka akan terdapat default.vue yang berisikan <Nuxt />
+   7.2. Tag nuxt (<Nuxt />) itu berguna untuk router, contoh jika ingin ke halaman home, halaman shop, dll
+   7.3. Halaman-halaman yang akan menggantikan tag Nuxt pada default.vue akan terdapat pada folder pages
+   7.4. Sebagai contoh jika didalam pages ada chat.vue maka pada saat mengakses localhost:3000/chat tag nuxt pada default.vue akan berubah menjadi chat.vue
+
+Link youtube tutor: https://www.youtube.com/watch?v=ltzlhAxJr74&t=2290s
+

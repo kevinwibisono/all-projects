@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/mainHome"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_home_24"
+        android:title="Home" />
+    <item
+        android:id="@+id/mainMenus"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_menu_24"
+        android:title="Menu" />
+    <item
+        android:id="@+id/mainOrders"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_assignment_24"
+        android:title="Pesanan" />
+    <item
+        android:id="@+id/mainAccount"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_account_circle_24"
+        android:title="Akun" />
+</menu>

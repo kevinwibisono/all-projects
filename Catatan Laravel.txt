@@ -1,0 +1,40 @@
+A. INSTALLING
+1. Install composer (butuh inet)
+2. ke directory xampp/htdocs (cd di command prompt)
+3. composer global require laravel/installer di cmd
+4. composer create-project --prefer-dist laravel/laravel <nama_project> (membuat folder di htdocs)
+
+B.PEMANGGILAN LARAVEL
+Cara 1/tanpa xampp:
+1. di cmd (di file project dalam htdocs) ketik command "php artisan serve"
+2. dapatkan alamat, masukkan di browser
+3. untuk menghentikan php artisan serve, ketik ctrl+c di terminal
+
+Cara 2/dengan xampp:
+1. masukkan url "localhost/proyek-fai/Code/public/[routes]"  --> jika folder projek bernama Code dan berada di dalam C:\xampp\htdocs\proyek-fai
+2. routes yang sudah ditentukan berada di file routes/web.php
+3. INGAT!!! setiap kali membuat function yang akan dipanggil melalui views, buat juga routes nya di web.php
+
+C. CONTROLLER
+1. Buat controller : php artisan make:controller <nama controller> ATAU php artisan make:controller <nama folder>/<nama controller>
+2. Tempat controller: C:\xampp\htdocs\FAI2019_laravel\app\Http\Controllers
+
+D. VIEW
+1. Tempat: C:\xampp\htdocs\FAI2019_laravel\resources\views
+2. harus menggunakan extension .blade.php
+
+E. MODEL
+1. Buat model: php artisan make:model <nama model>
+2. Edit database yg dipakai oleh laravel, di .env, ubah DB_DATABASE
+
+Migrations, untuk authentication
+1. php artisan migrate
+2. di db yang diset untuk project akan terbentuk table" baru
+
+F.Auth
+1. composer require laravel/ui --dev
+2. php artisan ui vue --auth
+3. npm install lalu npm run dev 
+ATAU
+3. install node js di browser
+

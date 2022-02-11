@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menuShopHome"
+        android:icon="@drawable/ic_baseline_home_24"
+        android:title="Home" />
+    <item
+        android:id="@+id/menuShopChat"
+        android:icon="@drawable/ic_baseline_chat_24"
+        android:title="Chat" />
+    <item
+        android:id="@+id/menuShopProduk"
+        android:icon="@drawable/icon_archive"
+        android:title="Produk" />
+    <item
+        android:id="@+id/menuShopPesanan"
+        android:icon="@drawable/ic_baseline_assignment_24"
+        android:title="Pesanan" />
+    <item
+        android:id="@+id/menuShopAkun"
+        android:icon="@drawable/ic_baseline_account_circle_24"
+        android:title="Akun" />
+</menu>

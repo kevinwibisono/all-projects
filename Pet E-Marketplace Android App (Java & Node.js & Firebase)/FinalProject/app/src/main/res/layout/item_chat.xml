@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <import type="my.istts.finalproject.ThousandSeparator"/>
+        <import type="android.view.View"/>
+        <variable
+            name="viewmodel"
+            type="my.istts.finalproject.viewmodels.itemviewmodels.ChatItemViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginBottom="10dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:gravity="center_horizontal"
+            android:text="@{viewmodel.tanggal}"
+            android:textColor="#000000"
+            android:visibility="@{viewmodel.isShown() ? View.VISIBLE : View.GONE, default=gone}"/>
+
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardChatProd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/not_so_rounded_corner"
+            app:cardBackgroundColor="#FFFFFF"
+            app:strokeWidth="3dp"
+            app:strokeColor="#FFFFFF"
+            android:visibility='@{viewmodel.chatItemVisible ? View.VISIBLE : View.GONE, default=gone}'>
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:id="@+id/partChatProduct"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:padding="10dp"
+                    android:orientation="horizontal"
+                    android:visibility='@{viewmodel.productName != "" ? View.VISIBLE : View.GONE, default=gone}'>
+
+                    <ImageView
+                        android:id="@+id/chatProductPic"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:scaleType="fitXY"
+                        android:visibility='@{viewmodel.productPic != "" ? View.VISIBLE : View.GONE, default=gone}'/>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="10dp"
+                            android:layout_weight="1"
+                            android:text='@{viewmodel.productName}'
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="10dp"
+                            android:layout_weight="2"
+                            android:visibility='@{viewmodel.productPrice != null ? View.VISIBLE : View.GONE, default=gone}'
+                            android:text='@{"Rp "+ThousandSeparator.getTS(viewmodel.productPrice)}'
+                            android:textColor="#000000" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/partChatHotel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:padding="10dp"
+                    android:orientation="horizontal"
+                    android:visibility='@{viewmodel.hotelName != "" ? View.VISIBLE : View.GONE, default=gone}'>
+
+                    <ImageView
+                        android:id="@+id/chatHotelPic"
+                        android:layout_width="75dp"
+                        android:layout_height="50dp"
+                        android:scaleType="fitXY"
+                        android:visibility='@{viewmodel.hotelPic != "" ? View.VISIBLE : View.GONE, default=gone}'/>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_gravity="center_vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="10dp"
+                            android:layout_weight="1"
+                            android:text='@{viewmodel.hotelName}'
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:visibility='@{viewmodel.hotelPrice != null ? View.VISIBLE : View.GONE, default=gone}'>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="10dp"
+                                android:text='@{"Rp "+ThousandSeparator.getTS(viewmodel.hotelPrice)}'
+                                android:textColor="#000000" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:text=" / malam"/>
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/partChatPet"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:padding="10dp"
+                    android:orientation="horizontal"
+                    android:visibility='@{viewmodel.adoptName != "" ? View.VISIBLE : View.GONE, default=gone}'>
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/chatAdoptPic"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginRight="10dp"
+                        android:scaleType="fitXY"
+                        app:shapeAppearanceOverlay="@style/circleImageView"
+                        android:visibility='@{viewmodel.adoptPic != "" ? View.VISIBLE : View.GONE, default=gone}'/>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:gravity="left"
+                        android:layout_gravity="center_vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@{viewmodel.adoptName}"
+                            android:textAppearance="?attr/textAppearanceHeadline6"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@{viewmodel.adoptDesc}"
+                            android:textSize="12sp" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <ProgressBar
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:visibility='@{viewmodel.itemName == "" ? View.VISIBLE : View.GONE, default=visible}'/>
+            </FrameLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardChatOrder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            app:strokeWidth="3dp"
+            android:background="@drawable/not_so_rounded_corner"
+            app:cardBackgroundColor="#FFFFFF"
+            android:visibility='@{viewmodel.idPJ != "" ? View.VISIBLE : View.GONE, default=visible}'>
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="10dp">
+
+                    <ImageView
+                        android:id="@+id/chatOrderPic"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginEnd="10dp"
+                        android:visibility="@{viewmodel.orderType % 2 == 0 ? View.VISIBLE : View.GONE, default=gone}"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:visibility="@{viewmodel.orderType &lt; 3 ? View.VISIBLE : View.GONE, default=gone}">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="@{viewmodel.orderStatus}"
+                            android:textColor="@android:color/holo_green_dark"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="@{viewmodel.orderItemName}"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:visibility="@{viewmodel.orderQty > 1 ? View.VISIBLE : View.GONE, default=gone}"
+                            android:text='@{"&amp; "+(viewmodel.orderQty-1)+" "+viewmodel.itemKind+" Lainnya"}'
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text='@{"Rp "+ThousandSeparator.getTS(viewmodel.orderTotal)}' />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:visibility="@{viewmodel.orderType &lt; 3 ? View.GONE : View.VISIBLE, default=gone}">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="@{viewmodel.orderStatus}"
+                            android:textColor="@android:color/holo_green_dark"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="@{viewmodel.orderItemName}"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text='@{"Tgl Janjitemu: "+viewmodel.orderItemDate}'
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <ProgressBar
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:visibility='@{viewmodel.itemName != "" ? View.GONE : View.VISIBLE, default=visible}'/>
+            </FrameLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardChatPic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/not_so_rounded_corner"
+            app:strokeWidth="3dp"
+            app:cardBackgroundColor="#FFFFFF"
+            android:visibility='@{viewmodel.chatPic != "" ? View.VISIBLE : View.GONE, default=gone}'>
+
+            <ImageView
+                android:id="@+id/chatPicture"
+                android:layout_width="150dp"
+                android:layout_height="150dp" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardChat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/not_so_rounded_corner"
+            app:cardBackgroundColor="#FFFFFF"
+            app:cardElevation="5dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:singleLine="false"
+                    android:text="@{viewmodel.message}"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{viewmodel.jam}" />
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+</layout>

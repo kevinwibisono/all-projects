@@ -1,0 +1,415 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="my.istts.finalproject.ThousandSeparator"/>
+        <import type="android.view.View"/>
+        <variable
+            name="viewmodel"
+            type="my.istts.finalproject.viewmodels.ChatViewModel" />
+    </data>
+
+    <LinearLayout
+        android:id="@+id/mainLayoutChat"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context="my.istts.finalproject.ChatActivity">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/topAppBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="visible">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/tbChat"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                app:contentInsetStart="0dp"
+                app:contentInsetStartWithNavigation="0dp"
+                app:navigationIcon="@drawable/ic_baseline_arrow_back_white_24"
+                app:titleMargin="0dp"
+                android:theme="@style/ToolbarTheme"
+                app:titleTextColor="#ffffff">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/ivChatProfilePic"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:background="#FFFFFF"
+                        android:scaleType="fitXY"
+                        app:shapeAppearanceOverlay="@style/circleImageView"
+                        app:srcCompat="@drawable/ic_baseline_account_circle_24" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_gravity="center_vertical"
+                        android:maxLines="1"
+                        android:text="@{viewmodel.personName}"
+                        android:textColor="#FFFFFF"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+            </com.google.android.material.appbar.MaterialToolbar>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#F1F1F1">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvChat"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:visibility="@{viewmodel.isChatLoading ? View.VISIBLE : View.GONE, default=gone}" />
+        </FrameLayout>
+
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.bottomappbar.BottomAppBar
+                android:id="@+id/bottomAppBar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:contentInsetStart="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:background="@drawable/not_so_rounded_corner"
+                        android:visibility="@{viewmodel.isItemShown() ? View.VISIBLE : View.GONE, default=gone}"
+                        app:cardBackgroundColor="#FFFFFF"
+                        app:cardElevation="5dp">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical"
+                                android:padding="10dp">
+
+                                <LinearLayout
+                                    android:id="@+id/chatSendOrder"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:visibility="gone">
+
+                                    <ImageView
+                                        android:id="@+id/ivChatOrderPic"
+                                        android:layout_width="50dp"
+                                        android:layout_height="50dp"
+                                        android:scaleType="fitXY"
+                                        android:layout_gravity="center_vertical"
+                                        android:layout_marginEnd="10dp"
+                                        android:visibility="@{viewmodel.chosenItemOrderType % 2 == 0 ? View.VISIBLE : View.GONE, default=gone}"/>
+
+                                    <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginBottom="5dp"
+                                        android:orientation="vertical"
+                                        android:visibility="@{viewmodel.chosenItemOrderType &lt; 3 ? View.VISIBLE : View.GONE, default=gone}">
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center_vertical"
+                                            android:text="@{viewmodel.chosenItemStatus}"
+                                            android:textColor="@android:color/holo_green_dark"
+                                            android:textSize="14sp"
+                                            android:textStyle="bold" />
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center_vertical"
+                                            android:text="@{viewmodel.chosenItemName}"
+                                            android:textSize="18sp"
+                                            android:textStyle="bold" />
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center_vertical"
+                                            android:visibility="@{viewmodel.chosenItemQty > 1 ? View.VISIBLE : View.GONE, default=gone}"
+                                            android:text='@{"&amp; "+(viewmodel.chosenItemQty-1)+" "+viewmodel.itemKind+" Lainnya"}'
+                                            android:textStyle="bold" />
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text='@{"Rp "+ThousandSeparator.getTS(viewmodel.chosenItemPrice)}' />
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginBottom="5dp"
+                                        android:orientation="vertical"
+                                        android:visibility="@{viewmodel.chosenItemOrderType &lt; 3 ? View.GONE : View.VISIBLE, default=gone}">
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center_vertical"
+                                            android:text="@{viewmodel.chosenItemStatus}"
+                                            android:textColor="@android:color/holo_green_dark"
+                                            android:textSize="14sp"
+                                            android:textStyle="bold" />
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center_vertical"
+                                            android:text="@{viewmodel.chosenItemName}"
+                                            android:textSize="18sp"
+                                            android:textStyle="bold" />
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center_vertical"
+                                            android:text='@{"Tgl Janjitemu: "+viewmodel.chosenItemDate}'
+                                            android:textStyle="bold" />
+                                    </LinearLayout>
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:id="@+id/chatSendProduct"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginBottom="5dp"
+                                    android:orientation="horizontal"
+                                    android:visibility="gone">
+
+                                    <ImageView
+                                        android:id="@+id/ivSendProductPic"
+                                        android:layout_width="50dp"
+                                        android:layout_height="50dp"
+                                        android:layout_gravity="center_vertical"
+                                        android:scaleType="fitXY"/>
+
+                                    <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical">
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center_vertical"
+                                            android:layout_marginStart="10dp"
+                                            android:background='@{viewmodel.chosenItemName == "" ? @color/lightGrey : @android:color/white, default=@color/lightGrey}'
+                                            android:text='@{viewmodel.chosenItemName == "" ? "" : viewmodel.chosenItemName, default=""}'
+                                            android:textSize="18sp"
+                                            android:textStyle="bold" />
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center_vertical"
+                                            android:layout_marginStart="10dp"
+                                            android:background='@{viewmodel.chosenItemPrice &lt; 1 ? @color/lightGrey : @android:color/white, default=@color/lightGrey}'
+                                            android:text='@{viewmodel.chosenItemPrice &lt; 1 ? "" : "Rp "+ThousandSeparator.getTS(viewmodel.chosenItemPrice), default=""}'
+                                            android:textSize="16sp" />
+                                    </LinearLayout>
+
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:id="@+id/chatSendHotel"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginBottom="5dp"
+                                    android:orientation="horizontal"
+                                    android:visibility="gone">
+
+                                    <ImageView
+                                        android:id="@+id/ivSendHotelPic"
+                                        android:layout_width="75dp"
+                                        android:layout_height="50dp"
+                                        android:layout_gravity="center_vertical"
+                                        android:scaleType="fitXY"/>
+
+                                    <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical">
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center_vertical"
+                                            android:layout_marginStart="10dp"
+                                            android:background='@{viewmodel.chosenItemName == "" ? @color/lightGrey : @android:color/white, default=@color/lightGrey}'
+                                            android:text='@{viewmodel.chosenItemName == "" ? "" : viewmodel.chosenItemName, default=""}'
+                                            android:textSize="18sp"
+                                            android:textStyle="bold" />
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="horizontal"
+                                            android:layout_marginStart="10dp"
+                                            android:background='@{viewmodel.chosenItemPrice &lt; 1 ? @color/lightGrey : @android:color/white, default=@color/lightGrey}'>
+
+                                            <TextView
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:layout_gravity="center_vertical"
+                                                android:text='@{viewmodel.chosenItemPrice &lt; 1 ? "" : "Rp "+ThousandSeparator.getTS(viewmodel.chosenItemPrice), default=""}'
+                                                android:textSize="16sp" />
+
+                                            <TextView
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:layout_gravity="center_vertical"
+                                                android:text='@{viewmodel.chosenItemPrice &lt; 1 ? "" : " / kamar", default=""}'
+                                                android:textSize="16sp" />
+                                        </LinearLayout>
+
+                                    </LinearLayout>
+
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:id="@+id/chatSendAdopt"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginBottom="5dp"
+                                    android:orientation="horizontal"
+                                    android:visibility="gone">
+
+                                    <com.google.android.material.imageview.ShapeableImageView
+                                        android:id="@+id/chatSendAdoptPic"
+                                        android:layout_width="50dp"
+                                        android:layout_height="50dp"
+                                        android:layout_marginEnd="10dp"
+                                        android:scaleType="fitXY"
+                                        app:shapeAppearanceOverlay="@style/circleImageView"/>
+
+                                    <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="left"
+                                        android:orientation="vertical"
+                                        android:layout_gravity="center_vertical">
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="@{viewmodel.chosenItemName}"
+                                            android:textAppearance="?attr/textAppearanceHeadline6"
+                                            android:textSize="14sp" />
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="@{viewmodel.chosenItemStatus}"
+                                            android:textSize="12sp" />
+
+                                    </LinearLayout>
+
+
+                                </LinearLayout>
+
+                                <ImageView
+                                    android:id="@+id/chatSendPicture"
+                                    android:layout_width="150dp"
+                                    android:layout_height="150dp"
+                                    android:layout_marginBottom="5dp"
+                                    android:visibility="gone"
+                                    tools:srcCompat="@tools:sample/avatars" />
+                            </LinearLayout>
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="5dp"
+                                android:onClick="@{() -> viewmodel.clearChatItems()}"
+                                android:src="@drawable/ic_baseline_clear_dark_24" />
+                        </LinearLayout>
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="#FFFFFF"
+                        android:orientation="horizontal"
+                        android:padding="10dp">
+
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@+id/chatAddCustom"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginEnd="5dp"
+                            android:background="@android:color/darker_gray"
+                            android:scaleType="fitXY"
+                            app:shapeAppearanceOverlay="@style/circleImageView"
+                            app:srcCompat="@drawable/ic_baseline_add_white_36" />
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:hint="ketikkan pesan"
+                            android:text="@={viewmodel.chatText}" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:onClick="@{() -> viewmodel.beginSendChat()}"
+                            android:enabled='@{viewmodel.chatText.length() &lt; 1 ? false : true, default=false}'
+                            android:text="Kirim"
+                            android:textSize="12sp"
+                            app:backgroundTint="#4CAF50" />
+                    </LinearLayout>
+                </LinearLayout>
+
+            </com.google.android.material.bottomappbar.BottomAppBar>
+
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+    </LinearLayout>
+</layout>
+

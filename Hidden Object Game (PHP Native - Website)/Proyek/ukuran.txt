@@ -1,0 +1,10 @@
+anchor - 29x36
+bicycle - 41x56
+binocular - 44x33
+glove - 33x39
+goldfish - 65x60
+grape - 76x110
+horse - 44x61
+microphone - 51x113
+ribbon - 27x47
+teapot - 47x36

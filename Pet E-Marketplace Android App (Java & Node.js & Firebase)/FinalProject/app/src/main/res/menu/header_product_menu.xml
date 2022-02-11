@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/headerProductCart"
+        android:icon="@drawable/cart_white"
+        android:title="Cart"
+        app:actionLayout="@layout/icon_cart"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/headerProductFav"
+        android:title="Favorit"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/headerProductChat"
+        android:title="Chat"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/headerProductHome"
+        android:title="Halaman Awal"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/headerProductAkun"
+        android:title="Akun Saya"
+        app:showAsAction="never" />
+</menu>

@@ -1,0 +1,10 @@
+bull - 69x71
+dagger - 82x21
+duck - 14x38
+fan - 63x80
+hand - 81x38
+icecream - 40x44
+lotion - 20x41
+money - 22x57
+palu - 28x64
+ribbon - 28x20

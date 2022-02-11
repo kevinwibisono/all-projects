@@ -1,0 +1,10 @@
+banana - 80x33
+brush - 12x88
+coconut - 54x38
+coins - 32x37
+lemon - 36x36
+magnifier - 82x42
+metronome - 49x70
+pineaple - 35x79
+pistol - 47x45
+sword - 38x186

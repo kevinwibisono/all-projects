@@ -1,0 +1,17 @@
+Cara mendapatkan seluruh event dari sebuah google calendar
+1. Ke developer google console
+2. Buat project dimana api key akan di-inisialisasi
+3. Pada projek tersebut, ke option dashboard kemudian enable apis and services
+4. Pilih google calendar api, click enable
+5. Pada tab overview, click create credentials
+6. Kemudian pada poin 1 terdapat tulisan "If you wish you can skip this step and create an API key", click API Key
+7. Setelah menginputkan nama dan jenis pemanggilan api, click create
+8. API key terbuat
+
+Web yang diakses:
+1. https://www.googleapis.com/calendar/v3/calendars/[calendar_id]/events?key=[api_key]{&timeMin=2020-01-01T10:00:00Z&timeMax=2020-01-01T10:00:00Z}
+2. calendar id dapat dilihat dari settings google calendar
+3. Pilih calendar dari my calendars atau other calendars
+4. Settings > [Calendar Choice] > Calendar Settings > Integrate Calendar > ambil dr src nya
+
+{} = optional query parameter

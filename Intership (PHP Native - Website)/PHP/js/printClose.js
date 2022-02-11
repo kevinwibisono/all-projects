@@ -1,0 +1,2 @@
+window.print();
+window.close();

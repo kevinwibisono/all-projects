@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/headerCart"
+        android:icon="@drawable/cart_white"
+        android:title="Cart"
+        app:actionLayout="@layout/icon_cart"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/headerChat"
+        android:icon="@drawable/chat_white"
+        android:title="Chat"
+        app:actionLayout="@layout/icon_chat"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/headerFavorite"
+        android:icon="@drawable/heart_white"
+        android:title="Favorite"
+        app:showAsAction="always" />
+</menu>

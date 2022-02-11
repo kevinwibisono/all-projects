@@ -1,0 +1,633 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="viewmodel"
+            type="com.example.sellerapp.viewmodels.ShopHomeViewModel" />
+    </data>
+
+    <LinearLayout
+        android:id="@+id/pageShopHome"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".ShopHomeFragment">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/tbAwal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:title="@{viewmodel.shopName}"
+                app:titleTextColor="@color/design_default_color_on_primary" />
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipeRefreshShopHome"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#FAFAFA"
+                    android:descendantFocusability="blocksDescendants"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:text="Hal-hal yang perlu diperhatikan"
+                        android:textColor="#000000" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/cardShopNew"
+                            android:layout_width="150dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="20dp"
+                            android:layout_marginBottom="10dp"
+                            android:onClick="showOrders"
+                            app:cardElevation="5dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical"
+                                android:padding="10dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="20dp"
+                                    android:text="Pesanan Baru"
+                                    android:textSize="16sp"
+                                    android:textStyle="bold" />
+
+                                <FrameLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="bottom|right">
+
+                                    <ProgressBar
+                                        android:layout_width="25dp"
+                                        android:layout_height="25dp"
+                                        android:visibility="@{viewmodel.isDoneCounting[0] ? View.GONE : View.VISIBLE, default=visible}" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="@{String.valueOf(viewmodel.getImportantThings[0])}"
+                                        android:textSize="18sp"
+                                        android:visibility="@{viewmodel.isDoneCounting[0] ? View.VISIBLE : View.GONE, default=gone}" />
+                                </FrameLayout>
+
+
+                            </LinearLayout>
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/cardShopDeliver"
+                            android:layout_width="150dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:onClick="showOrders"
+                            app:cardElevation="5dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical"
+                                android:padding="10dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="20dp"
+                                    android:text="Perlu Dikirim"
+                                    android:textSize="16sp"
+                                    android:textStyle="bold" />
+
+                                <FrameLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="bottom|right">
+
+                                    <ProgressBar
+                                        android:layout_width="25dp"
+                                        android:layout_height="25dp"
+                                        android:visibility="@{viewmodel.isDoneCounting[1] ? View.GONE : View.VISIBLE, default=visible}" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="@{String.valueOf(viewmodel.getImportantThings[1])}"
+                                        android:textSize="18sp"
+                                        android:visibility="@{viewmodel.isDoneCounting[1] ? View.VISIBLE : View.GONE, default=gone}" />
+                                </FrameLayout>
+                            </LinearLayout>
+                        </com.google.android.material.card.MaterialCardView>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/cardShopPickup"
+                            android:layout_width="150dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="20dp"
+                            android:layout_marginBottom="10dp"
+                            android:onClick="showOrders"
+                            app:cardElevation="5dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical"
+                                android:padding="10dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="20dp"
+                                    android:text="Siapkan untuk Pickup"
+                                    android:textSize="16sp"
+                                    android:textStyle="bold" />
+
+                                <FrameLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="bottom|right">
+
+                                    <ProgressBar
+                                        android:layout_width="25dp"
+                                        android:layout_height="25dp"
+                                        android:visibility="@{viewmodel.isDoneCounting[2] ? View.GONE : View.VISIBLE, default=visible}" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="@{String.valueOf(viewmodel.getImportantThings[2])}"
+                                        android:textSize="18sp"
+                                        android:visibility="@{viewmodel.isDoneCounting[2] ? View.VISIBLE : View.GONE, default=gone}" />
+                                </FrameLayout>
+                            </LinearLayout>
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/cardShopComplaints"
+                            android:layout_width="150dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="20dp"
+                            android:layout_marginBottom="10dp"
+                            android:onClick="moveIntent"
+                            app:cardElevation="5dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical"
+                                android:padding="10dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="20dp"
+                                    android:text="Komplain belum ditanggapi"
+                                    android:textSize="16sp"
+                                    android:textStyle="bold" />
+
+                                <FrameLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="bottom|right">
+
+                                    <ProgressBar
+                                        android:layout_width="25dp"
+                                        android:layout_height="25dp"
+                                        android:visibility="@{viewmodel.isDoneCounting[3] ? View.GONE : View.VISIBLE, default=visible}" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="@{String.valueOf(viewmodel.getImportantThings[3])}"
+                                        android:textSize="18sp"
+                                        android:visibility="@{viewmodel.isDoneCounting[3] ? View.VISIBLE : View.GONE, default=gone}" />
+                                </FrameLayout>
+                            </LinearLayout>
+                        </com.google.android.material.card.MaterialCardView>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/cardShopChat"
+                            android:layout_width="150dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="20dp"
+                            android:layout_marginBottom="10dp"
+                            android:onClick="showChat"
+                            app:cardElevation="5dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical"
+                                android:padding="10dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="20dp"
+                                    android:text="Chat belum dibaca"
+                                    android:textSize="16sp"
+                                    android:textStyle="bold" />
+
+                                <FrameLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="bottom|right">
+
+                                    <ProgressBar
+                                        android:layout_width="25dp"
+                                        android:layout_height="25dp"
+                                        android:visibility="@{viewmodel.isDoneCounting[4] ? View.GONE : View.VISIBLE, default=visible}" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="@{String.valueOf(viewmodel.getImportantThings[4])}"
+                                        android:textSize="18sp"
+                                        android:visibility="@{viewmodel.isDoneCounting[4] ? View.VISIBLE : View.GONE, default=gone}" />
+                                </FrameLayout>
+                            </LinearLayout>
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/cardShopDiskusi"
+                            android:layout_width="150dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="20dp"
+                            android:layout_marginBottom="10dp"
+                            android:onClick="moveIntent"
+                            app:cardElevation="5dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical"
+                                android:padding="10dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="20dp"
+                                    android:text="Diskusi belum dibalas"
+                                    android:textSize="16sp"
+                                    android:textStyle="bold" />
+
+                                <FrameLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="bottom|right">
+
+                                    <ProgressBar
+                                        android:layout_width="25dp"
+                                        android:layout_height="25dp"
+                                        android:visibility="@{viewmodel.isDoneCounting[5] ? View.GONE : View.VISIBLE, default=visible}" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="@{String.valueOf(viewmodel.getImportantThings[5])}"
+                                        android:textSize="18sp"
+                                        android:visibility="@{viewmodel.isDoneCounting[5] ? View.VISIBLE : View.GONE, default=gone}" />
+                                </FrameLayout>
+                            </LinearLayout>
+                        </com.google.android.material.card.MaterialCardView>
+
+                    </LinearLayout>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/cardShopUlasan"
+                        android:layout_width="150dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginBottom="30dp"
+                        android:onClick="moveIntent"
+                        app:cardElevation="5dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:padding="10dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="20dp"
+                                android:text="Ulasan belum dibalas"
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
+
+                            <FrameLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="bottom|right">
+
+                                <ProgressBar
+                                    android:layout_width="25dp"
+                                    android:layout_height="25dp"
+                                    android:visibility="@{viewmodel.isDoneCounting[6] ? View.GONE : View.VISIBLE, default=visible}" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@{String.valueOf(viewmodel.getImportantThings[6])}"
+                                    android:textSize="18sp"
+                                    android:visibility="@{viewmodel.isDoneCounting[6] ? View.VISIBLE : View.GONE, default=gone}" />
+                            </FrameLayout>
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:text="Produk-produk yang perlu diperhatikan"
+                        android:textColor="#000000" />
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="30dp">
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rvImportantProducts"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:visibility="@{viewmodel.productVMs.size() > 0 ? View.VISIBLE : View.GONE, default=gone}"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center|top"
+                            android:padding="10dp"
+                            android:text="Tidak Ada Produk Bermasalah Untuk Saat Ini"
+                            android:visibility="@{viewmodel.productVMs.size() > 0 ? View.GONE : View.VISIBLE, default=gone}"/>
+
+                        <ProgressBar
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:visibility="@{viewmodel.isProductLoading ? View.VISIBLE : View.GONE, default=visible}"/>
+                    </FrameLayout>
+
+                    <!--                <LinearLayout-->
+                    <!--                    android:layout_width="match_parent"-->
+                    <!--                    android:layout_height="wrap_content"-->
+                    <!--                    android:layout_marginBottom="20dp"-->
+                    <!--                    android:orientation="horizontal">-->
+
+                    <!--                    <TextView-->
+                    <!--                        android:layout_width="wrap_content"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:text="Performa Penjual"-->
+                    <!--                        android:textColor="#000000" />-->
+
+                    <!--                    <TextView-->
+                    <!--                        android:layout_width="wrap_content"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:layout_marginStart="10dp"-->
+                    <!--                        android:text="12-01-2021" />-->
+                    <!--                </LinearLayout>-->
+
+                    <!--                <LinearLayout-->
+                    <!--                    android:layout_width="match_parent"-->
+                    <!--                    android:layout_height="wrap_content"-->
+                    <!--                    android:layout_marginBottom="20dp"-->
+                    <!--                    android:orientation="vertical">-->
+
+                    <!--                    <LinearLayout-->
+                    <!--                        android:layout_width="match_parent"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:orientation="horizontal">-->
+
+                    <!--                        <TextView-->
+                    <!--                            android:layout_width="match_parent"-->
+                    <!--                            android:layout_height="wrap_content"-->
+                    <!--                            android:text="Perihal"-->
+                    <!--                            android:layout_weight="1"-->
+                    <!--                            android:layout_marginEnd="10dp"-->
+                    <!--                            android:textSize="16sp"-->
+                    <!--                            android:textStyle="bold"/>-->
+
+                    <!--                        <TextView-->
+                    <!--                            android:layout_width="match_parent"-->
+                    <!--                            android:layout_height="wrap_content"-->
+                    <!--                            android:text="Performa"-->
+                    <!--                            android:layout_weight="1"-->
+                    <!--                            android:layout_marginEnd="10dp"-->
+                    <!--                            android:textSize="16sp"-->
+                    <!--                            android:textStyle="bold"/>-->
+
+                    <!--                        <TextView-->
+                    <!--                            android:layout_width="match_parent"-->
+                    <!--                            android:layout_height="wrap_content"-->
+                    <!--                            android:text="Target"-->
+                    <!--                            android:layout_weight="1"-->
+                    <!--                            android:layout_marginEnd="10dp"-->
+                    <!--                            android:textSize="16sp"-->
+                    <!--                            android:textStyle="bold"/>-->
+                    <!--                    </LinearLayout>-->
+
+                    <!--                    <LinearLayout-->
+                    <!--                        android:layout_width="match_parent"-->
+                    <!--                        android:layout_height="2dp"-->
+                    <!--                        android:background="@android:color/darker_gray"-->
+                    <!--                        android:layout_marginTop="10dp"-->
+                    <!--                        android:layout_marginBottom="10dp"/>-->
+
+                    <!--                    <LinearLayout-->
+                    <!--                        android:layout_width="match_parent"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:orientation="horizontal">-->
+
+                    <!--                        <TextView-->
+                    <!--                            android:layout_width="match_parent"-->
+                    <!--                            android:layout_height="wrap_content"-->
+                    <!--                            android:layout_weight="1"-->
+                    <!--                            android:layout_marginEnd="10dp"-->
+                    <!--                            android:text="Kecepatan Balas Pesan" />-->
+
+                    <!--                        <TextView-->
+                    <!--                            android:layout_width="match_parent"-->
+                    <!--                            android:layout_height="wrap_content"-->
+                    <!--                            android:layout_weight="1"-->
+                    <!--                            android:layout_marginEnd="10dp"-->
+                    <!--                            android:textColor="@android:color/holo_red_light"-->
+                    <!--                            android:text="61 menit" />-->
+
+                    <!--                        <TextView-->
+                    <!--                            android:layout_width="match_parent"-->
+                    <!--                            android:layout_height="wrap_content"-->
+                    <!--                            android:layout_weight="1"-->
+                    <!--                            android:layout_marginEnd="10dp"-->
+                    <!--                            android:text="&lt; 60 menit" />-->
+                    <!--                    </LinearLayout>-->
+
+                    <!--                    <LinearLayout-->
+                    <!--                        android:layout_width="match_parent"-->
+                    <!--                        android:layout_height="1dp"-->
+                    <!--                        android:background="@android:color/darker_gray"-->
+                    <!--                        android:layout_marginTop="10dp"-->
+                    <!--                        android:layout_marginBottom="10dp"/>-->
+
+                    <!--                    <LinearLayout-->
+                    <!--                        android:layout_width="match_parent"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:orientation="horizontal">-->
+
+                    <!--                        <TextView-->
+                    <!--                            android:layout_width="match_parent"-->
+                    <!--                            android:layout_height="wrap_content"-->
+                    <!--                            android:layout_weight="1"-->
+                    <!--                            android:layout_marginEnd="10dp"-->
+                    <!--                            android:text="Tingkat Pesan Terbalas" />-->
+
+                    <!--                        <TextView-->
+                    <!--                            android:layout_width="match_parent"-->
+                    <!--                            android:layout_height="wrap_content"-->
+                    <!--                            android:layout_weight="1"-->
+                    <!--                            android:layout_marginEnd="10dp"-->
+                    <!--                            android:textColor="@android:color/holo_green_dark"-->
+                    <!--                            android:text="100%" />-->
+
+                    <!--                        <TextView-->
+                    <!--                            android:layout_width="match_parent"-->
+                    <!--                            android:layout_height="wrap_content"-->
+                    <!--                            android:layout_weight="1"-->
+                    <!--                            android:layout_marginEnd="10dp"-->
+                    <!--                            android:text="&gt; 90%" />-->
+                    <!--                    </LinearLayout>-->
+
+                    <!--                    <LinearLayout-->
+                    <!--                        android:layout_width="match_parent"-->
+                    <!--                        android:layout_height="1dp"-->
+                    <!--                        android:background="@android:color/darker_gray"-->
+                    <!--                        android:layout_marginTop="10dp"-->
+                    <!--                        android:layout_marginBottom="10dp"/>-->
+
+                    <!--                    <LinearLayout-->
+                    <!--                        android:layout_width="match_parent"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:orientation="horizontal">-->
+
+                    <!--                        <TextView-->
+                    <!--                            android:layout_width="match_parent"-->
+                    <!--                            android:layout_height="wrap_content"-->
+                    <!--                            android:layout_weight="1"-->
+                    <!--                            android:layout_marginEnd="10dp"-->
+                    <!--                            android:text="Kecepatan Persiapan Pickup" />-->
+
+                    <!--                        <TextView-->
+                    <!--                            android:layout_width="match_parent"-->
+                    <!--                            android:layout_height="wrap_content"-->
+                    <!--                            android:layout_weight="1"-->
+                    <!--                            android:layout_marginEnd="10dp"-->
+                    <!--                            android:textColor="@android:color/holo_green_dark"-->
+                    <!--                            android:text="1 jam 15 menit" />-->
+
+                    <!--                        <TextView-->
+                    <!--                            android:layout_width="match_parent"-->
+                    <!--                            android:layout_height="wrap_content"-->
+                    <!--                            android:layout_weight="1"-->
+                    <!--                            android:layout_marginEnd="10dp"-->
+                    <!--                            android:text="&lt; 3 jam" />-->
+                    <!--                    </LinearLayout>-->
+
+                    <!--                    <LinearLayout-->
+                    <!--                        android:layout_width="match_parent"-->
+                    <!--                        android:layout_height="1dp"-->
+                    <!--                        android:background="@android:color/darker_gray"-->
+                    <!--                        android:layout_marginTop="10dp"-->
+                    <!--                        android:layout_marginBottom="10dp"/>-->
+
+                    <!--                    <LinearLayout-->
+                    <!--                        android:layout_width="match_parent"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:orientation="horizontal">-->
+
+                    <!--                        <TextView-->
+                    <!--                            android:layout_width="match_parent"-->
+                    <!--                            android:layout_height="wrap_content"-->
+                    <!--                            android:layout_weight="1"-->
+                    <!--                            android:layout_marginEnd="10dp"-->
+                    <!--                            android:text="Kecepatan Pengiriman" />-->
+
+                    <!--                        <TextView-->
+                    <!--                            android:layout_width="match_parent"-->
+                    <!--                            android:layout_height="wrap_content"-->
+                    <!--                            android:layout_weight="1"-->
+                    <!--                            android:layout_marginEnd="10dp"-->
+                    <!--                            android:textColor="@android:color/holo_green_dark"-->
+                    <!--                            android:text="12 jam" />-->
+
+                    <!--                        <TextView-->
+                    <!--                            android:layout_width="match_parent"-->
+                    <!--                            android:layout_height="wrap_content"-->
+                    <!--                            android:layout_weight="1"-->
+                    <!--                            android:layout_marginEnd="10dp"-->
+                    <!--                            android:text="&lt; 12 jam" />-->
+                    <!--                    </LinearLayout>-->
+                    <!--                </LinearLayout>-->
+
+                </LinearLayout>
+            </ScrollView>
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+
+    </LinearLayout>
+
+</layout>
+
